@@ -55,8 +55,8 @@ public class stringsArrays {
 
 	/**
 	 * This method particularly works if spaces between words in a string need be
-	 * replaced with a string which is not necessarily the same size.  For
-	 * example replaceSpaceWith("Arian Seyedi", "%20") will return "Arian%20Seyedi".
+	 * replaced with a string which is not necessarily the same size. For example
+	 * replaceSpaceWith("Arian Seyedi", "%20") will return "Arian%20Seyedi".
 	 * 
 	 * @param str
 	 *            will have spaces repaced with the replacement in a new string.
@@ -77,6 +77,36 @@ public class stringsArrays {
 	}
 
 	/**
+	 * 
+	 * @param str
+	 * @return
+	 * @throws IllegalArgumentException
+	 *             if string is empty.
+	 */
+	public static String stringCompressor(String str) throws IllegalArgumentException {
+		if (str.length() == 0) {
+			throw new IllegalArgumentException("string cannot be empty!");
+		}
+		StringBuffer strbf = new StringBuffer(); // strin buffer for characters
+		// head start with zeroth char.
+		char c = str.charAt(0);
+		strbf.append(c);
+		int repetition = 1;
+		for (int i = 1; i < str.length(); i++) {
+			if (str.charAt(i) == c) {
+				repetition++; // nothing more to do here than to remember the repetition
+			} else {
+				strbf.append(repetition); // done with last char, append score already.
+				repetition = 1; // reset repetition to 1.
+				c = str.charAt(i); // update character
+				strbf.append(c); // add current char to buffer
+			}
+		}
+		strbf.append(repetition); // last char is missing its score, append score already.
+		return strbf.toString();
+	}
+
+	/**
 	 * Temporary for quick method checks.
 	 * 
 	 * @param args
@@ -85,7 +115,8 @@ public class stringsArrays {
 		for (String i : allMutations("011")) {
 			System.out.println(i);
 		} // this was a pass. 7.50 PM may 15.
-		System.out.print(replaceSpaceWith(" A rian  Seye di ", "%20"));
+		System.out.println(replaceSpaceWith(" A rian  Seye di ", "%20")); // pass
+		System.out.println(stringCompressor("DDDABBCDDD")); // pass
 	}
 
 }
