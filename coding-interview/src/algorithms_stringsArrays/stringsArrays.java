@@ -1,6 +1,5 @@
 package algorithms_stringsArrays;
 
-import java.nio.charset.Charset;
 import java.util.*;
 
 /**
@@ -58,34 +57,24 @@ public class stringsArrays {
 	 * This method particularly works if spaces between words in a string need be
 	 * replaced with a string which is not necessarily the same size. Input string
 	 * must have enough room for the additional characters at the end of it. For
-	 * example replaceSpaceWith("Arian Seyedi'space''space'", "%20", 12) will return
-	 * "Arian%20Seyedi" where 12 is the number of all characters minus the trailing
-	 * white space at the end to accommodate for the extra 2 characters. The term
-	 * 'space' is simply a place holder for space character for the sake of clarity
-	 * in the example.
+	 * example replaceSpaceWith("Arian Seyedi", "%20") will return "Arian%20Seyedi".
 	 * 
 	 * @param str
-	 *            will have spaces repaced with the replacement. Input str must have
-	 *            enough room to account for extra characters if any.
+	 *            will have spaces repaced with the replacement in a new string.
 	 * @param replacement
 	 *            the replacement for all spaces in str.
-	 * @return str with spaces replaced with the replacement.
+	 * @return str with spaces replaced with the replacement in a new string.
 	 */
-	public static String replaceSpaceWith(String str, String replacement, int trueLength) {
-		double numReplacements = str.length() / trueLength;
-		if (Math.floor(numReplacements) != (int) numReplacements) {
-			throw new IllegalArgumentException("Either wrong trueLength or string does not have right capacity.");
-		}
-		List<String> allChars = new ArrayList<String>();
-		int consecSpaces = 0;
-		for (int i = 0; i < str.length() - trueLength - 1; i++) {
-			if (str.charAt(i) == ' ' && str.charAt(i + 1) != ' ') {
-				allChars.add(replacement);
+	public static String replaceSpaceWith(String str, String replacement) {
+		StringBuffer strbf = new StringBuffer();
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(i) != ' ') {
+				strbf.append(str.charAt(i));
 			} else {
-				allChars.add(str.substring(i - 1, i)); 
+				strbf.append(replacement);
 			}
 		}
-		return str;
+		return strbf.toString();
 	}
 
 	/**
@@ -97,7 +86,7 @@ public class stringsArrays {
 		for (String i : allMutations("011")) {
 			System.out.println(i);
 		} // this was a pass. 7.50 PM may 15.
-
+		System.out.print(replaceSpaceWith(" A rian  Seye di ", "%20"));
 	}
 
 }
