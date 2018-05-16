@@ -1,5 +1,6 @@
 package algorithms_stringsArrays;
 
+import java.nio.charset.Charset;
 import java.util.*;
 
 /**
@@ -51,6 +52,40 @@ public class stringsArrays {
 			String rest = String.join("", substr.substring(0, i), substr.substring(i + 1));
 			allMutations_helper(mutations, String.join("", fixed, substr.substring(i, i + 1)), rest);
 		}
+	}
+
+	/**
+	 * This method particularly works if spaces between words in a string need be
+	 * replaced with a string which is not necessarily the same size. Input string
+	 * must have enough room for the additional characters at the end of it. For
+	 * example replaceSpaceWith("Arian Seyedi'space''space'", "%20", 12) will return
+	 * "Arian%20Seyedi" where 12 is the number of all characters minus the trailing
+	 * white space at the end to accommodate for the extra 2 characters. The term
+	 * 'space' is simply a place holder for space character for the sake of clarity
+	 * in the example.
+	 * 
+	 * @param str
+	 *            will have spaces repaced with the replacement. Input str must have
+	 *            enough room to account for extra characters if any.
+	 * @param replacement
+	 *            the replacement for all spaces in str.
+	 * @return str with spaces replaced with the replacement.
+	 */
+	public static String replaceSpaceWith(String str, String replacement, int trueLength) {
+		double numReplacements = str.length() / trueLength;
+		if (Math.floor(numReplacements) != (int) numReplacements) {
+			throw new IllegalArgumentException("Either wrong trueLength or string does not have right capacity.");
+		}
+		List<String> allChars = new ArrayList<String>();
+		int consecSpaces = 0;
+		for (int i = 0; i < str.length() - trueLength - 1; i++) {
+			if (str.charAt(i) == ' ' && str.charAt(i + 1) != ' ') {
+				allChars.add(replacement);
+			} else {
+				allChars.add(str.substring(i - 1, i));
+			}
+		}
+		return str;
 	}
 
 	/**
