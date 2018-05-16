@@ -82,7 +82,7 @@ public class stringsArrays {
 			if (str.charAt(i) == ' ' && str.charAt(i + 1) != ' ') {
 				allChars.add(replacement);
 			} else {
-				allChars.add(str.substring(i - 1, i));
+				allChars.add(str.substring(i - 1, i)); 
 			}
 		}
 		return str;
