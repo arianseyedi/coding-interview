@@ -19,15 +19,15 @@ public class stringsArrays {
 	/**
 	 * This class provides all possible mutations of a string, that is every
 	 * character combination that make up the given string. Uses a private recursive
-	 * helper method that runs in O(n^2). Thus method runs in O(n^2).
+	 * helper method that runs in O(xn!). Thus method runs in O(xn!).
 	 * 
 	 * @param str
 	 *            the input string whose list of possible mutations will be
 	 *            returned.
-	 * @return String array list with all possible mutations of input string.
+	 * @return String set with all possible mutations of input string.
 	 */
-	public static ArrayList<String> allMutations(String str) {
-		ArrayList<String> mutations = new ArrayList<String>();
+	public static Set<String> allMutations(String str) {
+		Set<String> mutations = new HashSet<String>();
 		allMutations_helper(mutations, "", str);
 		return mutations;
 	}
@@ -36,14 +36,14 @@ public class stringsArrays {
 	 * A recursive method to help create all possible mutations of a string.
 	 * 
 	 * @param mutations
-	 *            arrayList that will contain all mutations of fixed joined with
+	 *            hashSet that will contain all mutations of fixed joined with
 	 *            substr.
 	 * @param fixed
 	 *            fixed string which will not be included in finding its mutation.
 	 * @param substr
 	 *            will be explored for all possible mutations of this string.
 	 */
-	private static void allMutations_helper(ArrayList<String> mutations, String fixed, String substr) {
+	private static void allMutations_helper(Set<String> mutations, String fixed, String substr) {
 		if (substr.length() == 1) { // base case, finally join the two strings
 			mutations.add(String.join("", fixed, substr));
 		}
@@ -59,7 +59,7 @@ public class stringsArrays {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		for (String i : allMutations("ABCD")) {
+		for (String i : allMutations("011")) {
 			System.out.println(i);
 		} // this was a pass. 7.50 PM may 15.
 
