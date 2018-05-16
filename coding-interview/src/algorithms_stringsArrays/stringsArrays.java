@@ -55,7 +55,9 @@ public class stringsArrays {
 
 	/**
 	 * This method particularly works if spaces between words in a string need be
+
 	 * replaced with a string which is not necessarily the same size.  For
+
 	 * example replaceSpaceWith("Arian Seyedi", "%20") will return "Arian%20Seyedi".
 	 * 
 	 * @param str
@@ -71,9 +73,10 @@ public class stringsArrays {
 				strbf.append(str.charAt(i)); // append just like a copy.
 			} else {
 				strbf.append(replacement); // for every space, append replacement to buffer instead.
+
 			}
 		}
-		return strbf.toString();
+		return strbf.toString(); // buffer to string and return.
 	}
 
 	/**
