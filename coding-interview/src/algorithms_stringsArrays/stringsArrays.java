@@ -55,7 +55,7 @@ public class stringsArrays {
 
 	/**
 	 * This method particularly works if spaces between words in a string need be
-   * replaced with a string which is not necessarily the same size. For example
+	 * replaced with a string which is not necessarily the same size. For example
 	 * replaceSpaceWith("Arian Seyedi", "%20") will return "Arian%20Seyedi".
 	 * 
 	 * @param str
@@ -78,9 +78,15 @@ public class stringsArrays {
 	}
 
 	/**
+	 * This method compresses strings by showing every character and the number of
+	 * consecutive repetition of them such that the repetition follows the character
+	 * being repeated that many times. For instance, input string "AAACVVD" will
+	 * return "A3C1V2D1".
 	 * 
 	 * @param str
-	 * @return
+	 *            the string input containing any character.
+	 * @return a string containing every character followed by respective number of
+	 *         consecutive repetition.
 	 * @throws IllegalArgumentException
 	 *             if string is empty.
 	 */
