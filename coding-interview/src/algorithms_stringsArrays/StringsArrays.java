@@ -276,7 +276,7 @@ public class StringsArrays {
 			return false;
 		}
 		Map<Character, Integer> a = new HashMap<Character, Integer>();
-		str = str.replaceAll("[^A-Z^a-z^0-9]", ""); // strip every non alphabetic/numeric char.
+		str = str.replaceAll("[^A-Z^a-z^0-9]", ""); // strip every non alphanumeric char.
 		str = str.toLowerCase(); // important, ignore case.
 		int score = 0, odds = 0;
 		for (int i = 0; i < str.length(); i++) { // build char-score map.
