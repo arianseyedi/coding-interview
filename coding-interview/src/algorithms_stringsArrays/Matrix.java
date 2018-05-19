@@ -6,8 +6,6 @@ import java.util.List;
 public class Matrix {
 
 	private Integer[][] matrix; // double array representing the matrix.
-	private Integer[][] mutated_m; // mutable copy of matrix.
-	private boolean mutated; // 1 if original is mutated.
 
 	/**
 	 * Initialize a matrix by making a double array of a given row x column and set
@@ -73,7 +71,6 @@ public class Matrix {
 			throw new IllegalArgumentException("The 2-D array cannot be 1 x 1 in dimension. Not a valid Matrix!");
 		int rows = arr2D.length, cols = arr2D[0].length, thisCol;
 		this.matrix = new Integer[rows][cols]; // if input is to be a matrix, we will be safe.
-		this.mutated_m = new Integer[rows][cols]; // if input is to be a matrix, we will be safe.
 		try {
 			for (int i = 0; i < arr2D.length; i++) { // for every row
 				thisCol = arr2D[i].length;
@@ -86,10 +83,8 @@ public class Matrix {
 								"The 2-D array contains null value(s). Cannot form valid matrix.");
 					}
 					this.matrix[i][j] = arr2D[i][j];
-					this.mutated_m[i][j] = arr2D[i][j];
 				}
 			}
-			mutated = false; // not mutated.
 		} catch (IndexOutOfBoundsException e) { // index boundary error.
 			throw new IllegalArgumentException("The 2-D array column size mismatch!");
 		}
@@ -100,21 +95,23 @@ public class Matrix {
 	 * column will be set to that value.
 	 * 
 	 */
-	public void replace_rowCol_ofVal(int target) {
+	public Matrix replace_rowCol_ofVal(int target) {
 		List<NumPair> np = new ArrayList<NumPair>(); // (row, col) in this order.
+		Matrix res_m = new Matrix(this.matrix); // mutable copy of matrix.
+
 		this.locateNums(np, target); // locate all matrix cells locations (row, col)pair equal to input.
 		int i = 0;
 		while (i < np.size()) {
 			NumPair pair = np.get(i++);
 			System.out.println(pair);
 			for (int j = 0; j < matrix.length; j++) { // for all rows
-				mutated_m[j][pair.getPair2()] = target; // at fixed column using getPair2
+				res_m.matrix[j][pair.getPair2()] = target; // at fixed column using getPair2
 			}
 			for (int k = 0; k < matrix[0].length; k++) { // for all columns
-				mutated_m[pair.getPair1()][k] = target; // at fixed row using getPair1
+				res_m.matrix[pair.getPair1()][k] = target; // at fixed row using getPair1
 			}
 		}
-		mutated = true;
+		return res_m;
 	}
 
 	/**
@@ -136,46 +133,6 @@ public class Matrix {
 	}
 
 	/**
-	 * Print original matrix in the terminal.
-	 */
-	public void showOrig() {
-		show(this.matrix);
-	}
-
-	/**
-	 * show mutated matrix in the terminal.
-	 */
-	public void showMutated() {
-		if (mutated) {
-			show(this.mutated_m);
-			return;
-		}
-		System.out.println("Nothing to show. You must mutate your matrix first.");
-	}
-
-	/**
-	 * Return new copy of the mutated Matrix.
-	 * 
-	 * @return Deep copy of the mutated Matrix.
-	 */
-	public Matrix deepCopy_mutated() {
-		if (mutated) {
-			return deepCopy(this.mutated_m);
-		}
-		return null;
-	}
-
-	/**
-	 * Returns deep copy of 2-D array that is a valid matrix.
-	 * @param m a 2-D array, a valid matrix.
-	 * @return deep copy of 2-D array.
-	 */
-	private Matrix deepCopy(Integer[][] m) {
-		Matrix copy = new Matrix(m);
-		return copy;
-	}
-
-	/**
 	 * Compare two matrices. True if matrices of same dimension and all cells at the
 	 * same location are identical.
 	 */
@@ -188,8 +145,8 @@ public class Matrix {
 		if (!this.getSize().equals(m.getSize())) {
 			return false;
 		}
-		for(int i = 0; i < this.matrix.length; i++) {
-			for(int j = 0; j < this.matrix[0].length; j++) {
+		for (int i = 0; i < this.matrix.length; i++) {
+			for (int j = 0; j < this.matrix[0].length; j++) {
 				if (this.matrix[i][j] != m.matrix[i][j])
 					return false;
 			}
@@ -209,17 +166,33 @@ public class Matrix {
 	}
 
 	/**
+	 * Swaps values at two locations i and j
+	 * 
+	 * @param i
+	 *            a number pair stating the location of the first number in matrix
+	 * @param j
+	 *            a number pair stating the location of the second number in matrix.
+	 */
+	public static void swapVal(Matrix m, NumPair i, NumPair j) {
+		int row1 = i.getPair1(), col1 = i.getPair2();
+		int row2 = j.getPair1(), col2 = j.getPair2();
+		Integer temp = m.matrix[row1][col1].intValue(); // deep copy
+		m.matrix[row1][col1] = m.matrix[row2][col2];
+		m.matrix[row2][col2] = temp; 
+	}
+
+	/**
 	 * Shows a matrix in the terminal.
 	 * 
 	 * @param matrix
 	 *            input matrix to show.
 	 */
-	private void show(Integer[][] matrix) {
+	public static void show(Matrix m) {
 		System.out.println("\n");
-		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix[0].length; j++) {
-				System.out.print(matrix[i][j]);
-				if (j < matrix[0].length - 1)
+		for (int i = 0; i < m.matrix.length; i++) {
+			for (int j = 0; j < m.matrix[0].length; j++) {
+				System.out.print(m.matrix[i][j]);
+				if (j < m.matrix[0].length - 1)
 					System.out.print(" , ");
 			}
 			System.out.println();
@@ -231,9 +204,10 @@ public class Matrix {
 		// quick test
 		Integer[][] da = { { 1, 2, 3 }, { 1, 9, 8 }, { 1, 4, 1 }, { 4, 9, 0 } };
 		Matrix ma = new Matrix(da);
-		ma.showOrig();
+		Matrix.show(ma);
 		ma.replace_rowCol_ofVal(8);
-		new Matrix(da).showOrig();
 		System.out.println(ma.equals(new Matrix(da)));
+		swapVal(ma, new NumPair(1, 2), new NumPair(0, 3));
+		show(ma);
 	}
 }
