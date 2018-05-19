@@ -7,12 +7,13 @@ import java.util.*;
  * purpose. They may seem a bit random, as they are, but will give insights as
  * to how certain things can be done.
  * 
- * @author Arian
+ * @author Arian Seyedi
  *
  */
-public class stringsArrays {
+public class StringsArrays {
+	static int count = 0; // for debugging
 
-	public stringsArrays() {
+	public StringsArrays() {
 		// nothing
 	}
 
@@ -114,16 +115,114 @@ public class stringsArrays {
 	}
 
 	/**
+	 * Method returns all pairs in a list whose sum is equal to a certain amount
+	 * determined by the user. A pair is a wrapper object consisting of two
+	 * Integers. Runtime complexity is Omega(n^2) guaranteed. Method mutates input
+	 * array through heap-sorting.
+	 * 
+	 * @param a
+	 *            an array of Integers.
+	 * @param sum
+	 *            target sum for which the pairs will be looked for.
+	 * @return
+	 * @throws IllegalArgumentException
+	 *             if array has less than 2 numbers in it.
+	 */
+	public static List<NumPair> pairsSum(Integer[] a, Integer sum) {
+		if (a.length < 2) { // error check
+			throw new IllegalArgumentException("Array must at least contain 2 numbers.");
+		}
+		Sorting.heapSort(a); // mutator method to sort integer array. O(n log(n))
+		List<NumPair> result = new ArrayList<NumPair>();
+		if ((a[a.length - 1] + a[a.length - 2] < sum) || (a[0] + a[1] > sum)) {
+			// no chance of a non void answer
+			return result;
+		}
+		NumPair bounds = pickSumBoundary(a, sum); // O(n)
+		int f_index = bounds.getPair1(); // fixed index
+		int m_index = f_index + 1; // moving index
+		int end_index = bounds.getPair2(); // end index
+		pSum_helper(a, sum, f_index, m_index, end_index, result); // omega(n^2)
+		return result;
+	}
+
+	/**
+	 * Finds the inclusive beginning and end indices within which numbers at most
+	 * sum to a certain input sum in a sorted list of Integers.
+	 * 
+	 * @param a
+	 *            array of Integers.
+	 * @param sum
+	 *            the target sum.
+	 * @return an pair of beginning and end indices within which numbers in the
+	 *         input array sum to at most the given input sum.
+	 */
+	public static NumPair pickSumBoundary(Integer[] a, int sum) {
+		int beg = 0, end = a.length - 1;
+		while (a[end] >= sum) {
+			end--; // decrement end while equal or larger than sum
+		}
+		while (a[beg] + a[end] < sum) {
+			beg++; // increment beginning while sum of either ends smaller than sum.
+		}
+		return new NumPair(beg, end);
+	}
+
+	/**
+	 * Helper method recursively finds all pairs whose sum are equal to the input
+	 * sum.
+	 * 
+	 * @param arr
+	 *            array of Integers to pick pairs from. Accessor-only method.
+	 * @param sum
+	 *            input target sum to pair numbers.
+	 * @param f_ix
+	 *            the fixed index whose other pair member will be picked from the
+	 *            next available indices.
+	 * @param m_ix
+	 *            moving index used to iterate the array to search for pair sums.
+	 * @param end_ix
+	 *            TODO
+	 * @param pairsLs
+	 *            list of number pairs to be populated.
+	 * @return list of number pairs whose sum is equal to input sum.
+	 * @throws IllegalArgumentException
+	 *             if index is not available in the array, or array length less than
+	 *             2.
+	 */
+	private static void pSum_helper(Integer[] arr, Integer sum, int f_ix, int m_ix, int end_ix, List<NumPair> pairsLs) {
+		if (f_ix <= end_ix - 1) {
+			if (m_ix <= end_ix) {
+				if (sum - arr[f_ix] == arr[m_ix]) { // if sum equality true, add.
+					pairsLs.add(new NumPair(arr[f_ix], arr[m_ix]));
+					pSum_helper(arr, sum, f_ix, m_ix + 1, end_ix, pairsLs);
+				} else if (sum - arr[f_ix] - arr[m_ix] > 0) { // keep fixed one fixed, move the moving.
+					pSum_helper(arr, sum, f_ix, m_ix + 1, end_ix, pairsLs); // increment m_index
+				} else if (sum - arr[f_ix] - arr[f_ix + 1] > 0) {
+					// at this fixed position, no further moving index can equal sum, so move fixed
+					// index.
+					pSum_helper(arr, sum, f_ix + 1, f_ix + 2, end_ix, pairsLs); // increment m_index
+				}
+			} else { // reached end of array with the moving index, move the fixed index.
+				pSum_helper(arr, sum, f_ix + 1, f_ix + 2, end_ix, pairsLs);// increment m_index
+			}
+		}
+	}
+
+	/**
 	 * Temporary for quick method checks.
 	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		for (String i : allMutations("011")) {
+		// test pairsSum
+//		Integer[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+//				27, 28, 29, 30 };
+		Integer[] b  = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+		List<NumPair> np = pairsSum(b, 16);
+		for (NumPair i : np) {
 			System.out.println(i);
-		} // this was a pass. 7.50 PM may 15.
-		System.out.println(replaceSpaceWith(" A rian  Seye di ", "%20")); // pass
-		System.out.println(stringCompressor("DDDABBCDDD")); // pass
+		}
 	}
 
 }
