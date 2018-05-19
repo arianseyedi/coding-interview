@@ -210,17 +210,44 @@ public class StringsArrays {
 	}
 
 	/**
+	 * Returns the number of integers in common between two sorted arrays.
+	 * 
+	 * @param arr1
+	 *            sorted array of integers.
+	 * @param arr2
+	 *            sorted array of integers.
+	 * @return The number of integers in common between two arrays.
+	 */
+	public static int inCommon(Integer[] arr1, Integer[] arr2) {
+		if (arr1 == null || arr2 == null) { // error check
+			throw new NullPointerException("Neither inputs can be null.");
+		}
+		int count = 0; // common number count.
+		int i1 = 0, i2 = 0; // index markers
+		while (i1 < arr1.length && i2 < arr2.length) {
+			if (arr1[i1] < arr2[i2]) // arr1 marker behind, push forward
+				i1++;
+			else if (arr2[i2] < arr1[i1]) // arr2 marker behind, push forward
+				i2++;
+			else { // current indices correspond to equal numbers, count one up
+				count++;
+				i2++;
+				i1++;
+			}
+		}
+		return count;
+	}
+
+	/**
 	 * Temporary for quick method checks.
 	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// test pairsSum
-		Integer[] b = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-		List<NumPair> np = pairsSum(b, 16);
-		for (NumPair i : np) {
-			System.out.println(i);
-		}
+		// test inCommon
+		Integer[] a = { 1, 9, 12, 13, 15 };
+		Integer[] b = { 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15 };
+		System.out.println(inCommon(a, b));
 	}
 
 }

@@ -133,4 +133,29 @@ class Test_StringsArrays {
 		}
 
 	}
+	
+	/**
+	 * Tests method in charge of finding number of common elements in two arrays.
+	 */
+	@Test
+	public void test_inCommon() {
+		Integer[] a = { 1, 9, 12, 13, 15 };
+		Integer[] b = { 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15 };
+		assertEquals(4, StringsArrays.inCommon(a, b), "Unexpected number of elements in common!");
+		
+		Integer[] c = {};
+		Integer[] d = { 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15 };
+		assertEquals(0, StringsArrays.inCommon(c, d), "Unexpected number of elements in common!");
+
+		Integer[] e = {};
+		Integer[] f = {};
+		assertEquals(0, StringsArrays.inCommon(e, f), "Unexpected number of elements in common!");
+		
+		try {
+			StringsArrays.inCommon(null, a);
+			fail("Must have thrown null exception");
+		}catch (NullPointerException ex) {
+			// pass
+		}
+	}
 }
