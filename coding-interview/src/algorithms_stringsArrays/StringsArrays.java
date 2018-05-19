@@ -10,10 +10,10 @@ import java.util.*;
  * @author Arian Seyedi
  *
  */
-public class stringsArrays {
+public class StringsArrays {
 	static int count = 0; // for debugging
 
-	public stringsArrays() {
+	public StringsArrays() {
 		// nothing
 	}
 
@@ -128,17 +128,17 @@ public class stringsArrays {
 	 * @throws IllegalArgumentException
 	 *             if array has less than 2 numbers in it.
 	 */
-	public static List<numPair> pairsSum(Integer[] a, Integer sum) {
+	public static List<NumPair> pairsSum(Integer[] a, Integer sum) {
 		if (a.length < 2) { // error check
 			throw new IllegalArgumentException("Array must at least contain 2 numbers.");
 		}
-		sorting.heapSort(a); // mutator method to sort integer array. O(n log(n))
-		List<numPair> result = new ArrayList<numPair>();
+		Sorting.heapSort(a); // mutator method to sort integer array. O(n log(n))
+		List<NumPair> result = new ArrayList<NumPair>();
 		if ((a[a.length - 1] + a[a.length - 2] < sum) || (a[0] + a[1] > sum)) {
 			// no chance of a non void answer
 			return result;
 		}
-		numPair bounds = pickSumBoundary(a, sum); // O(n)
+		NumPair bounds = pickSumBoundary(a, sum); // O(n)
 		int f_index = bounds.getPair1(); // fixed index
 		int m_index = f_index + 1; // moving index
 		int end_index = bounds.getPair2(); // end index
@@ -158,7 +158,7 @@ public class stringsArrays {
 	 * @return an pair of beginning and end indices within which numbers in the
 	 *         input array sum to at most the given input sum.
 	 */
-	public static numPair pickSumBoundary(Integer[] a, int sum) {
+	public static NumPair pickSumBoundary(Integer[] a, int sum) {
 		int beg = 0, end = a.length - 1;
 		while (a[end] >= sum) {
 			end--; // decrement end while equal or larger than sum
@@ -166,7 +166,7 @@ public class stringsArrays {
 		while (a[beg] + a[end] < sum) {
 			beg++; // increment beginning while sum of either ends smaller than sum.
 		}
-		return new numPair(beg, end);
+		return new NumPair(beg, end);
 	}
 
 	/**
@@ -191,12 +191,11 @@ public class stringsArrays {
 	 *             if index is not available in the array, or array length less than
 	 *             2.
 	 */
-	private static void pSum_helper(Integer[] arr, Integer sum, int f_ix, int m_ix, int end_ix, List<numPair> pairsLs) {
-		System.out.println("     f_index = " + f_ix + ", m_index = " + m_ix);
+	private static void pSum_helper(Integer[] arr, Integer sum, int f_ix, int m_ix, int end_ix, List<NumPair> pairsLs) {
 		if (f_ix <= end_ix - 1) {
 			if (m_ix <= end_ix) {
 				if (sum - arr[f_ix] == arr[m_ix]) { // if sum equality true, add.
-					pairsLs.add(new numPair(arr[f_ix], arr[m_ix]));
+					pairsLs.add(new NumPair(arr[f_ix], arr[m_ix]));
 					pSum_helper(arr, sum, f_ix, m_ix + 1, end_ix, pairsLs);
 				} else if (sum - arr[f_ix] - arr[m_ix] > 0) { // keep fixed one fixed, move the moving.
 					pSum_helper(arr, sum, f_ix, m_ix + 1, end_ix, pairsLs); // increment m_index
@@ -225,8 +224,8 @@ public class stringsArrays {
 		// test pairsSum
 		Integer[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
 				27, 28, 29, 30 };
-		List<numPair> np = pairsSum(a, 10);
-		for (numPair i : np) {
+		List<NumPair> np = pairsSum(a, 10);
+		for (NumPair i : np) {
 			System.out.println(i);
 		}
 		System.out.println(count);

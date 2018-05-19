@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
  * @author Arian Seyedi
  *
  */
-public class sorting {
+public class Sorting {
 
 	/**
 	 * Sorts the input array of Integers a using HeapSort. Result is returned in a.
