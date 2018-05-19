@@ -268,28 +268,20 @@ public class StringsArrays {
 	 * A permuted palindrome is just the same letters, jumbled up. This method
 	 * ignores separators, especial characters and case.
 	 * 
-	 * @param str string used to test whether it is a permuted palindrome.
+	 * @param str
+	 *            string used to test whether it is a permuted palindrome.
 	 * @return true if str is a palindrome itself or a permuted one.
 	 */
 	public static boolean couldBeAPalindrome(String str) {
 		if (str.length() == 0) { // empty string is a no-go
 			return false;
 		}
-		Map<Character, Integer> a = new HashMap<Character, Integer>();
+		Map<Character, Integer> scoreMap = new HashMap<Character, Integer>();
 		str = str.replaceAll("[^A-Z^a-z^0-9]", ""); // strip every non alphanumeric char.
 		str = str.toLowerCase(); // important, ignore case.
-		int score = 0, odds = 0;
-		for (int i = 0; i < str.length(); i++) { // build char-score map.
-			char charAt = str.charAt(i);
-			if (a.containsKey(charAt)) { // update respective score if key is old
-				score = a.get(charAt);
-				a.put(charAt, ++score);
-			}
-			else { // if new score is 1
-				a.put(charAt, 1);
-			}
-		}
-		for (int sc : a.values()) { // count odd scores
+		int odds = 0;
+		buildScoreMap(str, scoreMap);
+		for (int sc : scoreMap.values()) { // count odd scores
 			if (sc % 2 > 0) {
 				odds++;
 				if (odds > 1) {// either no odds or 1 odd is allowed
@@ -298,6 +290,29 @@ public class StringsArrays {
 			}
 		}
 		return true; // all checks pass, must be a palindrome
+	}
+
+	/**
+	 * Build a map of characters as keys and their number of repetition in the input
+	 * string.
+	 * 
+	 * @param str
+	 *            the string to build score map of.
+	 * @param scoreMap
+	 *            the map of keys as characters building the input string repeated
+	 *            as many as their respective value.
+	 */
+	private static void buildScoreMap(String str, Map<Character, Integer> scoreMap) {
+		int score = 0;
+		for (int i = 0; i < str.length(); i++) { // build char-score map.
+			char charAt = str.charAt(i);
+			if (scoreMap.containsKey(charAt)) { // update respective score if key is old
+				score = scoreMap.get(charAt);
+				scoreMap.put(charAt, ++score);
+			} else { // if new score is 1
+				scoreMap.put(charAt, 1);
+			}
+		}
 	}
 
 	/**
