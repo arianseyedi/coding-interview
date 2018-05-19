@@ -97,10 +97,10 @@ public class NumPair {
 	}
 
 	/**
-	 * Returns true if all the number pairs in one list exists in the other.
-	 * @param npLs1
-	 * @param npLs2
-	 * @return
+	 * Returns true if all the unique number pairs in one list exist in the other.
+	 * @param npLs1 list of unique number pairs.
+	 * @param npLs2 list of unique number pairs.
+	 * @return True if all the unique number pairs in one list exist in the other.
 	 */
 	public static boolean containsAll(List<NumPair> npLs1, List<NumPair> npLs2) {
 		int count = 0, enough = Math.min(npLs1.size(), npLs2.size());

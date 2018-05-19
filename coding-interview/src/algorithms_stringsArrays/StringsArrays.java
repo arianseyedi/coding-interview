@@ -216,7 +216,7 @@ public class StringsArrays {
 	 */
 	public static void main(String[] args) {
 		// test pairsSum
-		Integer[] b  = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+		Integer[] b = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
 		List<NumPair> np = pairsSum(b, 16);
 		for (NumPair i : np) {
 			System.out.println(i);
