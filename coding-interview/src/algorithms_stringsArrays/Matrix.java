@@ -178,7 +178,7 @@ public class Matrix {
 		int row2 = j.getPair1(), col2 = j.getPair2();
 		Integer temp = m.matrix[row1][col1].intValue(); // deep copy
 		m.matrix[row1][col1] = m.matrix[row2][col2];
-		m.matrix[row2][col2] = temp;
+		m.matrix[row2][col2] = temp; 
 	}
 
 	/**
