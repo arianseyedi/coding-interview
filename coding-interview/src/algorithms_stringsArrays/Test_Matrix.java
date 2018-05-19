@@ -50,15 +50,13 @@ class Test_Matrix {
 		Integer[][] exp = { { 1, 2, 8 }, { 8, 8, 8 }, { 1, 4, 8 }, { 4, 9, 8 } };
 		Matrix expected = new Matrix(exp); // expected matrix
 		Matrix actual = new Matrix(da);
-		actual.replace_rowCol_ofVal(8);
-		actual = actual.deepCopy_mutated(); // actual matrix. get a copy of mutated for comparison
+		actual = actual.replace_rowCol_ofVal(8); // actual matrix. get a copy of mutated for comparison
 		assertTrue(actual.equals(expected));
-		
+
 		Integer[][] exp2 = { { 1, 2, 3 }, { 1, 9, 8 }, { 1, 4, 1 }, { 4, 9, 0 } };
 		expected = new Matrix(exp2); // expected matrix
-		actual = new Matrix(da);
-		actual.replace_rowCol_ofVal(128); // should not alter the state of the function.
-		actual = actual.deepCopy_mutated(); // actual matrix. get a copy of mutated for comparison
+		actual = new Matrix(da); // should not alter the state of the function.
+		actual = actual.replace_rowCol_ofVal(128);// actual matrix. get a copy of mutated for comparison
 		assertTrue(actual.equals(expected));
 	}
 
