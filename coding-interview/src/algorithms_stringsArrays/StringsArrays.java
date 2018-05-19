@@ -277,19 +277,16 @@ public class StringsArrays {
 		}
 		Map<Character, Integer> a = new HashMap<Character, Integer>();
 		str = str.replaceAll("[^A-Z^a-z^0-9]", ""); // strip every non alphabetic/numeric char.
-		str = str.toLowerCase();
-		System.out.println(str);
+		str = str.toLowerCase(); // important, ignore case.
 		int score = 0, odds = 0;
 		for (int i = 0; i < str.length(); i++) { // build char-score map.
 			char charAt = str.charAt(i);
 			if (a.containsKey(charAt)) { // update respective score if key is old
 				score = a.get(charAt);
 				a.put(charAt, ++score);
-				System.out.println("OLD : "+charAt+", score: "+score);
 			}
-			else {
+			else { // if new score is 1
 				a.put(charAt, 1);
-				System.out.println("NEW : "+charAt+", score: "+1);
 			}
 		}
 		for (int sc : a.values()) { // count odd scores
