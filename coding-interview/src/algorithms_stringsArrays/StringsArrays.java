@@ -255,13 +255,12 @@ public class StringsArrays {
 		for (int i = 0; i < str.length(); i++) {
 			char at = str.charAt(i); // set comparison char
 			for (int j = i + 1; j < str.length(); j++) { // iterate through rest
-				System.out.println("---- comparing "+at+" and "+str.charAt(j));
+				System.out.println("---- comparing " + at + " and " + str.charAt(j));
 				if (at == str.charAt(j)) { // fatal, return false.
 					return false;
 				}
 			}
 		}
-
 		return true;
 	}
 
