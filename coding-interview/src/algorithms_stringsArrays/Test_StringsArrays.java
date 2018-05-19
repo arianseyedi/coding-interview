@@ -85,7 +85,7 @@ class Test_StringsArrays {
 	}
 
 	/**
-	 * Tests method for finding pairs with specific sum for boundary conditions.
+	 * Test method for finding pairs with specific sum for boundary conditions.
 	 */
 	@Test
 	public void test_pairsSum_bcn() {
@@ -111,7 +111,7 @@ class Test_StringsArrays {
 	}
 
 	/**
-	 * Tests method for finding pairs with specific sum for accuracy.
+	 * Test method for finding pairs with specific sum for accuracy.
 	 */
 	@Test
 	public void test_pairsSum_accuracy() {
@@ -135,7 +135,7 @@ class Test_StringsArrays {
 	}
 
 	/**
-	 * Tests method in charge of finding number of common elements in two arrays.
+	 * Test method in charge of finding number of common elements in two arrays.
 	 */
 	@Test
 	public void test_inCommon() {
@@ -160,7 +160,7 @@ class Test_StringsArrays {
 	}
 
 	/**
-	 * Tests method in charge of testing whehther a string contains all unique
+	 * Test method in charge of testing whether a string contains all unique
 	 * characters.
 	 */
 	@Test
@@ -172,5 +172,22 @@ class Test_StringsArrays {
 		assertTrue(!StringsArrays.isUnique("/'124*&$*7", false)); // exp false
 		assertTrue(!StringsArrays.isUnique("/'124*&$*7", true)); // exp false
 		assertTrue(StringsArrays.isUnique("/'124*&$7", true)); // exp true
+	}
+
+	/**
+	 * Test method in charge of testing whether a string is a permutation of a
+	 * palindrome or one itself. Ignores case, special characters and separators.
+	 * 
+	 */
+	@Test
+	public void test_palindrome() {
+		assertTrue(StringsArrays.couldBeAPalindrome("A man, a plan, a canal, Panama!")); // exp true
+		assertTrue(StringsArrays.couldBeAPalindrome("Was it a car or a cat I saw?")); // exp true No 'x' in Nixon
+		assertTrue(StringsArrays.couldBeAPalindrome("No 'x' in Nixon")); // exp true
+		assertTrue(StringsArrays.couldBeAPalindrome("No 'xY' in Nixon")); // exp true
+		assertTrue(!StringsArrays.couldBeAPalindrome("No 'Y' in Nixon")); // exp false
+		assertTrue(!StringsArrays.couldBeAPalindrome("")); // exp true
+		assertTrue(!StringsArrays.couldBeAPalindrome("APANAMA")); // exp true
+
 	}
 }
