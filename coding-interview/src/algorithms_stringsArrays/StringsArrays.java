@@ -219,9 +219,6 @@ public class StringsArrays {
 	 * @return The number of integers in common between two arrays.
 	 */
 	public static int inCommon(Integer[] arr1, Integer[] arr2) {
-		if (arr1 == null || arr2 == null) { // error check
-			throw new NullPointerException("Neither inputs can be null.");
-		}
 		int count = 0; // common number count.
 		int i1 = 0, i2 = 0; // index markers
 		while (i1 < arr1.length && i2 < arr2.length) {
@@ -239,15 +236,46 @@ public class StringsArrays {
 	}
 
 	/**
+	 * Returns true if string has all unique characters without use of additional
+	 * data structures.
+	 * 
+	 * @param str
+	 *            string to be searched for having all-unique characters.
+	 * @param ignoreCase
+	 *            if true will ignore case, e.g. "Arian" will return true.
+	 * @return true if input string consists of all-unique characters.
+	 */
+	public static boolean isUnique(String str, boolean ignoreCase) {
+		if (str.length() == 0) {
+			return true;
+		}
+		if (ignoreCase) {
+			str = str.toLowerCase();
+		}
+		for (int i = 0; i < str.length(); i++) {
+			char at = str.charAt(i); // set comparison char
+			for (int j = i + 1; j < str.length(); j++) { // iterate through rest
+				System.out.println("---- comparing "+at+" and "+str.charAt(j));
+				if (at == str.charAt(j)) { // fatal, return false.
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Temporary for quick method checks.
 	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// test inCommon
-		Integer[] a = { 1, 9, 12, 13, 15 };
-		Integer[] b = { 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15 };
-		System.out.println(inCommon(a, b));
+		// test isUnique
+		System.out.println(isUnique("Arian", false));
+		System.out.println(isUnique("Arian", true));
+		System.out.println(isUnique("", false));
+		System.out.println(isUnique("asbby", false));
 	}
 
 }

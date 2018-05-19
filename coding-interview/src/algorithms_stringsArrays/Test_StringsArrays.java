@@ -92,30 +92,30 @@ class Test_StringsArrays {
 		try {
 			StringsArrays.pairsSum(new Integer[] {}, 0);
 			fail("Missed error check!");
-		}catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			// pass
 		}
 		try {
-			StringsArrays.pairsSum(new Integer[] {1}, 0);
+			StringsArrays.pairsSum(new Integer[] { 1 }, 0);
 			fail("Missed error check!");
-		}catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			// pass
 		}
 		try {
-			StringsArrays.pairsSum(new Integer[] {1, 2}, 0);
+			StringsArrays.pairsSum(new Integer[] { 1, 2 }, 0);
 			// pass
-		}catch (Exception e) {
+		} catch (Exception e) {
 			fail("Valid inputs caused unexpected error");
 		}
 
 	}
-	
+
 	/**
 	 * Tests method for finding pairs with specific sum for accuracy.
 	 */
 	@Test
 	public void test_pairsSum_accuracy() {
-		Integer[] a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+		Integer[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
 		List<NumPair> expected = new ArrayList<NumPair>(); // for sum = 16
 		expected.add(new NumPair(1, 15));
 		expected.add(new NumPair(2, 14));
@@ -126,14 +126,14 @@ class Test_StringsArrays {
 		expected.add(new NumPair(7, 9));
 		try {
 			List<NumPair> nmp = StringsArrays.pairsSum(a, 16);
-			assertEquals(expected.size(), nmp.size(),"Number pair list length mismatch!");
+			assertEquals(expected.size(), nmp.size(), "Number pair list length mismatch!");
 			assertTrue(NumPair.containsAll(expected, nmp));
-		}catch (Exception e) {
+		} catch (Exception e) {
 			fail("Valid inputs caused unexpected error");
 		}
 
 	}
-	
+
 	/**
 	 * Tests method in charge of finding number of common elements in two arrays.
 	 */
@@ -142,7 +142,7 @@ class Test_StringsArrays {
 		Integer[] a = { 1, 9, 12, 13, 15 };
 		Integer[] b = { 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15 };
 		assertEquals(4, StringsArrays.inCommon(a, b), "Unexpected number of elements in common!");
-		
+
 		Integer[] c = {};
 		Integer[] d = { 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15 };
 		assertEquals(0, StringsArrays.inCommon(c, d), "Unexpected number of elements in common!");
@@ -150,12 +150,27 @@ class Test_StringsArrays {
 		Integer[] e = {};
 		Integer[] f = {};
 		assertEquals(0, StringsArrays.inCommon(e, f), "Unexpected number of elements in common!");
-		
+
 		try {
 			StringsArrays.inCommon(null, a);
 			fail("Must have thrown null exception");
-		}catch (NullPointerException ex) {
+		} catch (NullPointerException ex) {
 			// pass
 		}
+	}
+
+	/**
+	 * Tests method in charge of testing whehther a string contains all unique
+	 * characters.
+	 */
+	@Test
+	public void test_isUnique() {
+		assertTrue(StringsArrays.isUnique("Arian Seyd", false)); // exp true
+		assertTrue(!StringsArrays.isUnique("Arian Seyd", true)); // exp fale
+		assertTrue(StringsArrays.isUnique("", false)); // exp true
+		assertTrue(StringsArrays.isUnique(" ", true)); // exp true
+		assertTrue(!StringsArrays.isUnique("/'124*&$*7", false)); // exp false
+		assertTrue(!StringsArrays.isUnique("/'124*&$*7", true)); // exp false
+		assertTrue(StringsArrays.isUnique("/'124*&$7", true)); // exp true
 	}
 }
