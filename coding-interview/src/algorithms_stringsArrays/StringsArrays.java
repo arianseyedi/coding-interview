@@ -143,7 +143,6 @@ public class StringsArrays {
 		int m_index = f_index + 1; // moving index
 		int end_index = bounds.getPair2(); // end index
 		pSum_helper(a, sum, f_index, m_index, end_index, result); // omega(n^2)
-		System.out.println(end_index);
 		return result;
 	}
 
@@ -216,19 +215,14 @@ public class StringsArrays {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		for (String i : allMutations("011")) {
-			System.out.println(i);
-		} // this was a pass. 7.50 PM may 15.
-		System.out.println(replaceSpaceWith(" A rian  Seye di ", "%20")); // pass
-		System.out.println(stringCompressor("DDDABBCDDD")); // pass
 		// test pairsSum
-		Integer[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
-				27, 28, 29, 30 };
-		List<NumPair> np = pairsSum(a, 10);
+//		Integer[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+//				27, 28, 29, 30 };
+		Integer[] b  = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+		List<NumPair> np = pairsSum(b, 16);
 		for (NumPair i : np) {
 			System.out.println(i);
 		}
-		System.out.println(count);
 	}
 
 }

@@ -125,8 +125,9 @@ class Test_StringsArrays {
 		expected.add(new NumPair(6, 10));
 		expected.add(new NumPair(7, 9));
 		try {
-			List<NumPair> nmp = StringsArrays.pairsSum(a, 26);
-			// pass
+			List<NumPair> nmp = StringsArrays.pairsSum(a, 16);
+			assertEquals(expected.size(), nmp.size(),"Number pair list length mismatch!");
+			assertTrue(NumPair.containsAll(expected, nmp));
 		}catch (Exception e) {
 			fail("Valid inputs caused unexpected error");
 		}

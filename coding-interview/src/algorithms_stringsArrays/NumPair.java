@@ -1,5 +1,7 @@
 package algorithms_stringsArrays;
 
+import java.util.List;
+
 /**
  * This class creates a pair of Integers. Used as a wrapper to keep two Integers
  * with a certain property ex. co-prime, or sum up to X, etc.
@@ -13,8 +15,11 @@ public class NumPair {
 
 	/**
 	 * Constructor creates an object wrapping two integers.
-	 * @param pair1 one Integer
-	 * @param pair2 another Integer
+	 * 
+	 * @param pair1
+	 *            one Integer
+	 * @param pair2
+	 *            another Integer
 	 */
 	public NumPair(Integer pair1, Integer pair2) {
 		this.pair1 = pair1;
@@ -23,15 +28,17 @@ public class NumPair {
 
 	/**
 	 * Returns a deep copy of pair1.
+	 * 
 	 * @return a deep copy of pair1.
 	 */
 	public Integer getPair1() {
 		Integer copy = this.pair1.intValue();
 		return copy;
 	}
-	
+
 	/**
 	 * Returns a deep copy of pair2.
+	 * 
 	 * @return a deep copy of pair2.
 	 */
 	public Integer getPair2() {
@@ -41,6 +48,7 @@ public class NumPair {
 
 	/**
 	 * Calculates the sum of the two wrapped integers.
+	 * 
 	 * @return
 	 */
 	public Integer sum() {
@@ -51,11 +59,16 @@ public class NumPair {
 	 * This method compares this number pair with another. Returns true if both
 	 * numbers in one pair exist in the other, thus the order does not matter.
 	 * 
-	 * @param np
+	 * @param numPair
 	 *            the number pair to compare.
 	 * @return true if both numbers in one pair also exist in the other one.
 	 */
-	public boolean equals(NumPair np) { // order does not matter
+	@Override
+	public boolean equals(Object numPair) { // order does not matter
+		if (numPair.getClass() != NumPair.class) {
+			throw new IllegalArgumentException("Object must be a number pair object!");
+		}
+		NumPair np = (NumPair) numPair;
 		if ((this.getPair1() == np.getPair1() && this.getPair2() == np.getPair2())
 				|| (this.getPair2() == np.getPair1() && this.getPair1() == np.getPair2())) {
 			return true;
@@ -68,12 +81,49 @@ public class NumPair {
 		return "(" + this.pair1 + ", " + this.pair2 + ")";
 	}
 
+	/**
+	 * Searches for this pair in a given list.
+	 * 
+	 * @param npLs
+	 * @return True if this pair exists in the given list.
+	 */
+	public boolean containsNumPair(List<NumPair> npLs) {
+		for (int i = 0; i < npLs.size(); i++) {
+			if (this.equals(npLs.get(i))) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Returns true if all the number pairs in one list exists in the other.
+	 * @param npLs1
+	 * @param npLs2
+	 * @return
+	 */
+	public static boolean containsAll(List<NumPair> npLs1, List<NumPair> npLs2) {
+		int count = 0, enough = Math.min(npLs1.size(), npLs2.size());
+		for (int i = 0; i < npLs1.size(); i++) {
+			NumPair np1Now = npLs1.get(i);
+			for (int j = 0; j < npLs1.size(); j++) {
+				if (np1Now.equals(npLs2.get(j))) {
+					count++;
+					if (count == enough)
+						break;
+				}
+			}
+		}
+		if (count == enough) {
+			return true;
+		}
+		return false;
+	}
+
 	public static void main(String[] args) { // quick check
 		NumPair a = new NumPair(2, 19);
 		NumPair b = new NumPair(2, 19);
 		NumPair c = new NumPair(19, 2);
-		Integer maybeCopy = a.getPair1();
-		maybeCopy = 22;
 		System.out.println(a.equals(b));
 		System.out.println(a.equals(c));
 
