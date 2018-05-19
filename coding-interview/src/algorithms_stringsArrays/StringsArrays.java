@@ -255,13 +255,49 @@ public class StringsArrays {
 		for (int i = 0; i < str.length(); i++) {
 			char at = str.charAt(i); // set comparison char
 			for (int j = i + 1; j < str.length(); j++) { // iterate through rest
-				System.out.println("---- comparing " + at + " and " + str.charAt(j));
 				if (at == str.charAt(j)) { // fatal, return false.
 					return false;
 				}
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * A palindrome is a word that is read the same backwards as it is read forward.
+	 * A permutad palindrom is just the same letters, jumbled up. This method
+	 * ignores separators, especial characters and case.
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static boolean couldBeAPalindrome(String str) {
+		if (str.length() == 0) { // empty string is a no-go
+			return false;
+		}
+		Map<Character, Integer> a = new HashMap<Character, Integer>();
+		str = str.replaceAll("[^A-Z^a-z^0-9]", ""); // strip every non alphabetic/numeric char.
+		str = str.toLowerCase(); // important, ignore case.
+		int score = 0, odds = 0;
+		for (int i = 0; i < str.length(); i++) { // build char-score map.
+			char charAt = str.charAt(i);
+			if (a.containsKey(charAt)) { // update respective score if key is old
+				score = a.get(charAt);
+				a.put(charAt, ++score);
+			}
+			else { // if new score is 1
+				a.put(charAt, 1);
+			}
+		}
+		for (int sc : a.values()) { // count odd scores
+			if (sc % 2 > 0) {
+				odds++;
+				if (odds > 1) {// either no odds or 1 odd is allowed
+					return false;
+				}
+			}
+		}
+		return true; // all checks pass, must be a palindrome
 	}
 
 	/**
@@ -275,6 +311,7 @@ public class StringsArrays {
 		System.out.println(isUnique("Arian", true));
 		System.out.println(isUnique("", false));
 		System.out.println(isUnique("asbby", false));
+		couldBeAPalindrome("ARA&&**  (");
 	}
 
 }
