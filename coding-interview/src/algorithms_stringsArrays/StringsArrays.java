@@ -265,11 +265,11 @@ public class StringsArrays {
 
 	/**
 	 * A palindrome is a word that is read the same backwards as it is read forward.
-	 * A permutad palindrom is just the same letters, jumbled up. This method
+	 * A permuted palindrome is just the same letters, jumbled up. This method
 	 * ignores separators, especial characters and case.
 	 * 
-	 * @param str
-	 * @return
+	 * @param str string used to test whether it is a permuted palindrome.
+	 * @return true if str is a palindrome itself or a permuted one.
 	 */
 	public static boolean couldBeAPalindrome(String str) {
 		if (str.length() == 0) { // empty string is a no-go
