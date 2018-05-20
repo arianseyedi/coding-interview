@@ -3,6 +3,14 @@ package algorithms_stringsArrays;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is generously built to assist with a few algorithms for a specific
+ * application. Find references in methods documentation below.
+ * 
+ * @see Laakmann McDowell, 2015 Chapter1 for original question.
+ * @author Arian Seyedi
+ *
+ */
 public class Matrix {
 
 	private Integer[][] matrix; // double array representing the matrix.
@@ -94,6 +102,11 @@ public class Matrix {
 	 * If an element in an MxN matrix is equal to the input, its entire row and
 	 * column will be set to that value.
 	 * 
+	 * @see Laakmann McDowell, 2015 Chapter1 for original question.
+	 * @author Arian Seyedi
+	 * @param target
+	 *            target value to be used to replace the intercepting row and
+	 *            column.
 	 */
 	public Matrix replace_rowCol_ofVal(int target) {
 		List<NumPair> np = new ArrayList<NumPair>(); // (row, col) in this order.
@@ -166,6 +179,19 @@ public class Matrix {
 	}
 
 	/**
+	 * Rotate a NxN matrix (where N is odd) 90 degrees clockwise. Method uses an
+	 * in-place algorithm to accomplish this task.
+	 * 
+	 * @see Laakmann McDowell, 2015 Chapter1 for original question.
+	 * @author Arian Seyedi
+	 * @param m
+	 *            matrix to be rotated.
+	 */
+	public static void rotate90_CW(Matrix m) {
+
+	}
+
+	/**
 	 * Swaps values at two locations i and j
 	 * 
 	 * @param i
@@ -178,7 +204,7 @@ public class Matrix {
 		int row2 = j.getPair1(), col2 = j.getPair2();
 		Integer temp = m.matrix[row1][col1].intValue(); // deep copy
 		m.matrix[row1][col1] = m.matrix[row2][col2];
-		m.matrix[row2][col2] = temp; 
+		m.matrix[row2][col2] = temp;
 	}
 
 	/**
@@ -207,7 +233,8 @@ public class Matrix {
 		Matrix.show(ma);
 		ma.replace_rowCol_ofVal(8);
 		System.out.println(ma.equals(new Matrix(da)));
-		swapVal(ma, new NumPair(1, 2), new NumPair(0, 3));
+		swapVal(ma, new NumPair(1, 2), new NumPair(0, 1));
 		show(ma);
+
 	}
 }

@@ -3,8 +3,8 @@ package algorithms_stringsArrays;
 import java.util.List;
 
 /**
- * This class creates a pair of Integers. Used as a wrapper to keep two Integers
- * with a certain property ex. co-prime, or sum up to X, etc.
+ * This helper class creates a pair of Integers. Used as a wrapper to keep two
+ * Integers with a certain property ex. co-prime, or sum up to X, etc.
  * 
  * @author Arian Seyedi
  *
@@ -98,8 +98,11 @@ public class NumPair {
 
 	/**
 	 * Returns true if all the unique number pairs in one list exist in the other.
-	 * @param npLs1 list of unique number pairs.
-	 * @param npLs2 list of unique number pairs.
+	 * 
+	 * @param npLs1
+	 *            list of unique number pairs.
+	 * @param npLs2
+	 *            list of unique number pairs.
 	 * @return True if all the unique number pairs in one list exist in the other.
 	 */
 	public static boolean containsAll(List<NumPair> npLs1, List<NumPair> npLs2) {

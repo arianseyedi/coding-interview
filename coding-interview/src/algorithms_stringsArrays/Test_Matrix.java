@@ -45,7 +45,7 @@ class Test_Matrix {
 			fail("failed to throw IAE for a null array.");
 		} catch (IllegalArgumentException e) {
 			// pass
-		} 
+		}
 		Integer[][] da = { { 1, 2, 3 }, { 1, 9, 8 }, { 1, 4, 1 }, { 4, 9, 0 } };
 		Integer[][] exp = { { 1, 2, 8 }, { 8, 8, 8 }, { 1, 4, 8 }, { 4, 9, 8 } };
 		Matrix expected = new Matrix(exp); // expected matrix
