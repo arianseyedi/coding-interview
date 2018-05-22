@@ -187,8 +187,38 @@ public class Matrix {
 	 * @param m
 	 *            matrix to be rotated.
 	 */
-	public static void rotate90_CW(Matrix m) {
+	public static Matrix rotate90_CW(Matrix m) {
+		if (m.getSize().getPair1() != m.getSize().getPair2()) {
+			throw new IllegalArgumentException("Not a square Matrix! Matrix must be of size N x N");
+		}
+		int row = m.getSize().getPair1(), col = m.getSize().getPair2();
+		Integer[][] rotated = new Integer[row][col];
+		if (m.getSize().getPair1() % 2 != 0) {
+			
+		}
+		return m;
+	}
 
+	/**
+	 * Find 90degree CW position with respect to Cartesian coordinates centred at
+	 * the matrix. Position is a number pair. Method assumes properly sized valid
+	 * matrix and an available position as argument.
+	 * 
+	 * @param pos
+	 *            number pair representing position in format: (row, column). The
+	 *            total size of matrix must be given to find respective location of
+	 *            cell.
+	 * @return shifted position, a number pair of format (row, column);
+	 */
+	private static NumPair get_90rotatedPos(NumPair pos, NumPair size) {
+		int center = (int) Math.floor(size.getPair1() / 2); // not ceil: positions are 0-based!
+		int x = pos.getPair1(), y = pos.getPair2(); // y -> row, x -> column
+		if (x == center && y == center) // at center, no rotation applies
+			return NumPair.deepCopy(pos);
+		if (y == center) // along x axis
+			return new NumPair(pos.getPair2(), pos.getPair1());
+		// any other situation below applies
+		return new NumPair(pos.getPair2(), center * 2 - pos.getPair1());
 	}
 
 	/**
@@ -226,15 +256,32 @@ public class Matrix {
 
 	}
 
+	/**
+	 * Show the available position within a Matrix object.
+	 */
+	public void showPositions() {
+		System.out.println("\n");
+		for (int i = 0; i < this.matrix.length; i++) {
+			for (int j = 0; j < this.matrix[0].length; j++) {
+				System.out.print("(" + i + " , " + j + ")");
+				if (j < this.matrix[0].length - 1)
+					System.out.print(" ");
+			}
+			System.out.println("\n");
+		}
+	}
+
 	public static void main(String[] args) {
 		// quick test
-		Integer[][] da = { { 1, 2, 3 }, { 1, 9, 8 }, { 1, 4, 1 }, { 4, 9, 0 } };
+		Integer[][] da = { { 5, 8, 3, 2, 0, 1},  { 5, 8, 3, 2, 0, 1},  { 5, 8, 3, 2, 0, 1},  { 5, 8, 3, 2, 0, 1},
+				 { 5, 8, 3, 2, 0, 1},  { 5, 8, 3, 2, 0, 1}};
+		Integer[][] da2 = { { 5, 8, 3, 2, 0},  { 5, 8, 3, 2,1},  { 5, 8, 3, 0, 1},  { 8, 3, 2, 0, 1},
+				 { 5, 3, 2, 0, 1}};
 		Matrix ma = new Matrix(da);
-		Matrix.show(ma);
-		ma.replace_rowCol_ofVal(8);
-		System.out.println(ma.equals(new Matrix(da)));
-		swapVal(ma, new NumPair(1, 2), new NumPair(0, 1));
-		show(ma);
+		Matrix ma2 = new Matrix(da2);
+//		show(ma2);
+		ma.showPositions();
+		ma2.showPositions();
 
 	}
 }

@@ -47,6 +47,17 @@ public class NumPair {
 	}
 
 	/**
+	 * Deep copy the input number pair
+	 * 
+	 * @param toCopy
+	 *            number pair to deep copy
+	 * @return deep copy of input number pair
+	 */
+	public static NumPair deepCopy(NumPair toCopy) {
+		return new NumPair(toCopy.getPair1(), toCopy.getPair2());
+	}
+
+	/**
 	 * Calculates the sum of the two wrapped integers.
 	 * 
 	 * @return
