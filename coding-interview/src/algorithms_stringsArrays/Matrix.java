@@ -99,6 +99,41 @@ public class Matrix {
 	}
 
 	/**
+	 * Set value at position given by number pair with format (row, column).
+	 * 
+	 * @param pos
+	 *            Number pair indicating (row, column)
+	 * @param value
+	 *            of cell at given position
+	 */
+	private void set(NumPair pos, Integer val) {
+		try {
+			this.matrix[pos.getPair1()][pos.getPair2()] = val;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new NullPointerException("Position non existent. Matrix is of size " + this.getSize());
+		}
+	}
+
+	/**
+	 * get value at desired row and column.
+	 * 
+	 * @param row
+	 *            desired position's row.
+	 * @param col
+	 *            desired position's column.
+	 * @return value at input row and column in a matrix object.
+	 * @throws NullPointerException
+	 *             if position at row, column is non-existent.
+	 */
+	private Integer get(int row, int col) {
+		try {
+			return this.matrix[row][col];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new NullPointerException("Position non existent. Matrix is of size " + this.getSize());
+		}
+	}
+
+	/**
 	 * If an element in an MxN matrix is equal to the input, its entire row and
 	 * column will be set to that value.
 	 * 
@@ -187,16 +222,31 @@ public class Matrix {
 	 * @param m
 	 *            matrix to be rotated.
 	 */
-	public static Matrix rotate90_CW(Matrix m) {
-		if (m.getSize().getPair1() != m.getSize().getPair2()) {
+	public Matrix rotate90_CW() {
+		NumPair size = getSize();
+		int rows = size.getPair1(), cols = size.getPair2();
+		if (rows != cols) {
 			throw new IllegalArgumentException("Not a square Matrix! Matrix must be of size N x N");
 		}
-		int row = m.getSize().getPair1(), col = m.getSize().getPair2();
-		Integer[][] rotated = new Integer[row][col];
-		if (m.getSize().getPair1() % 2 != 0) {
-			
+		
+		int i, j; // row, col and loop indices
+		Matrix rot = new Matrix(rows, cols);
+		if (rows % 2 != 0) { // odd size. axes are real
+			for (i = 0; i < rows; i++) {
+				for (j = 0; j < cols; j++) {
+					NumPair p = get_90rotatedPos(i, j);
+					rot.set(p, get(i,j));
+				}
+			}
+			return rot;
 		}
-		return m;
+		// matrix is of even size, no real axis
+		for (i = 0; i < rows; i++) {
+			for (j = 0; j < cols; j++) {
+				rot.set(new NumPair(j, rows - i - 1), get(i,j));	
+			}
+		}
+		return rot;
 	}
 
 	/**
@@ -204,21 +254,20 @@ public class Matrix {
 	 * the matrix. Position is a number pair. Method assumes properly sized valid
 	 * matrix and an available position as argument.
 	 * 
-	 * @param pos
-	 *            number pair representing position in format: (row, column). The
-	 *            total size of matrix must be given to find respective location of
-	 *            cell.
+	 * @param row
+	 *            desired position's row
+	 * @param col
+	 *            desired position's column
 	 * @return shifted position, a number pair of format (row, column);
 	 */
-	private static NumPair get_90rotatedPos(NumPair pos, NumPair size) {
-		int center = (int) Math.floor(size.getPair1() / 2); // not ceil: positions are 0-based!
-		int x = pos.getPair1(), y = pos.getPair2(); // y -> row, x -> column
-		if (x == center && y == center) // at center, no rotation applies
-			return NumPair.deepCopy(pos);
-		if (y == center) // along x axis
-			return new NumPair(pos.getPair2(), pos.getPair1());
+	private NumPair get_90rotatedPos(int row, int col) {
+		int center = (int) Math.floor(this.getSize().getPair1() / 2); // not ceil: positions are 0-based!
+		if (col == center && row == center) // at center, no rotation applies
+			return new NumPair(col, row);
+		if (row == center) // along x axis
+			return new NumPair(col, row);
 		// any other situation below applies
-		return new NumPair(pos.getPair2(), center * 2 - pos.getPair1());
+		return new NumPair(col, center * 2 - row);
 	}
 
 	/**
@@ -243,12 +292,12 @@ public class Matrix {
 	 * @param matrix
 	 *            input matrix to show.
 	 */
-	public static void show(Matrix m) {
+	public void show() {
 		System.out.println("\n");
-		for (int i = 0; i < m.matrix.length; i++) {
-			for (int j = 0; j < m.matrix[0].length; j++) {
-				System.out.print(m.matrix[i][j]);
-				if (j < m.matrix[0].length - 1)
+		for (int i = 0; i < this.matrix.length; i++) {
+			for (int j = 0; j < this.matrix[0].length; j++) {
+				System.out.print(this.matrix[i][j]);
+				if (j < this.matrix[0].length - 1)
 					System.out.print(" , ");
 			}
 			System.out.println();
@@ -273,15 +322,5 @@ public class Matrix {
 
 	public static void main(String[] args) {
 		// quick test
-		Integer[][] da = { { 5, 8, 3, 2, 0, 1},  { 5, 8, 3, 2, 0, 1},  { 5, 8, 3, 2, 0, 1},  { 5, 8, 3, 2, 0, 1},
-				 { 5, 8, 3, 2, 0, 1},  { 5, 8, 3, 2, 0, 1}};
-		Integer[][] da2 = { { 5, 8, 3, 2, 0},  { 5, 8, 3, 2,1},  { 5, 8, 3, 0, 1},  { 8, 3, 2, 0, 1},
-				 { 5, 3, 2, 0, 1}};
-		Matrix ma = new Matrix(da);
-		Matrix ma2 = new Matrix(da2);
-//		show(ma2);
-		ma.showPositions();
-		ma2.showPositions();
-
 	}
 }
