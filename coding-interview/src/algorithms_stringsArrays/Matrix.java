@@ -3,6 +3,14 @@ package algorithms_stringsArrays;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is generously built to assist with a few algorithms for a specific
+ * application. Find references in methods documentation below.
+ * 
+ * @see Laakmann McDowell, 2015 Chapter1 for original question.
+ * @author Arian Seyedi
+ *
+ */
 public class Matrix {
 
 	private Integer[][] matrix; // double array representing the matrix.
@@ -91,9 +99,49 @@ public class Matrix {
 	}
 
 	/**
+	 * Set value at position given by number pair with format (row, column).
+	 * 
+	 * @param pos
+	 *            Number pair indicating (row, column)
+	 * @param value
+	 *            of cell at given position
+	 */
+	private void set(NumPair pos, Integer val) {
+		try {
+			this.matrix[pos.getPair1()][pos.getPair2()] = val;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new NullPointerException("Position non existent. Matrix is of size " + this.getSize());
+		}
+	}
+
+	/**
+	 * get value at desired row and column.
+	 * 
+	 * @param row
+	 *            desired position's row.
+	 * @param col
+	 *            desired position's column.
+	 * @return value at input row and column in a matrix object.
+	 * @throws NullPointerException
+	 *             if position at row, column is non-existent.
+	 */
+	private Integer get(int row, int col) {
+		try {
+			return this.matrix[row][col];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new NullPointerException("Position non existent. Matrix is of size " + this.getSize());
+		}
+	}
+
+	/**
 	 * If an element in an MxN matrix is equal to the input, its entire row and
 	 * column will be set to that value.
 	 * 
+	 * @see Laakmann McDowell, 2015 Chapter1 for original question.
+	 * @author Arian Seyedi
+	 * @param target
+	 *            target value to be used to replace the intercepting row and
+	 *            column.
 	 */
 	public Matrix replace_rowCol_ofVal(int target) {
 		List<NumPair> np = new ArrayList<NumPair>(); // (row, col) in this order.
@@ -166,6 +214,63 @@ public class Matrix {
 	}
 
 	/**
+	 * Rotate a NxN matrix (where N is odd) 90 degrees clockwise. Method uses an
+	 * in-place algorithm to accomplish this task.
+	 * 
+	 * @see Laakmann McDowell, 2015 Chapter1 for original question.
+	 * @author Arian Seyedi
+	 * @param m
+	 *            matrix to be rotated.
+	 */
+	public Matrix rotate90_CW() {
+		NumPair size = getSize();
+		int rows = size.getPair1(), cols = size.getPair2();
+		if (rows != cols) {
+			throw new IllegalArgumentException("Not a square Matrix! Matrix must be of size N x N");
+		}
+		
+		int i, j; // row, col and loop indices
+		Matrix rot = new Matrix(rows, cols);
+		if (rows % 2 != 0) { // odd size. axes are real
+			for (i = 0; i < rows; i++) {
+				for (j = 0; j < cols; j++) {
+					NumPair p = get_90rotatedPos(i, j);
+					rot.set(p, get(i,j));
+				}
+			}
+			return rot;
+		}
+		// matrix is of even size, no real axis
+		for (i = 0; i < rows; i++) {
+			for (j = 0; j < cols; j++) {
+				rot.set(new NumPair(j, rows - i - 1), get(i,j));	
+			}
+		}
+		return rot;
+	}
+
+	/**
+	 * Find 90degree CW position with respect to Cartesian coordinates centred at
+	 * the matrix. Position is a number pair. Method assumes properly sized valid
+	 * matrix and an available position as argument.
+	 * 
+	 * @param row
+	 *            desired position's row
+	 * @param col
+	 *            desired position's column
+	 * @return shifted position, a number pair of format (row, column);
+	 */
+	private NumPair get_90rotatedPos(int row, int col) {
+		int center = (int) Math.floor(this.getSize().getPair1() / 2); // not ceil: positions are 0-based!
+		if (col == center && row == center) // at center, no rotation applies
+			return new NumPair(col, row);
+		if (row == center) // along x axis
+			return new NumPair(col, row);
+		// any other situation below applies
+		return new NumPair(col, center * 2 - row);
+	}
+
+	/**
 	 * Swaps values at two locations i and j
 	 * 
 	 * @param i
@@ -178,7 +283,7 @@ public class Matrix {
 		int row2 = j.getPair1(), col2 = j.getPair2();
 		Integer temp = m.matrix[row1][col1].intValue(); // deep copy
 		m.matrix[row1][col1] = m.matrix[row2][col2];
-		m.matrix[row2][col2] = temp; 
+		m.matrix[row2][col2] = temp;
 	}
 
 	/**
@@ -187,12 +292,12 @@ public class Matrix {
 	 * @param matrix
 	 *            input matrix to show.
 	 */
-	public static void show(Matrix m) {
+	public void show() {
 		System.out.println("\n");
-		for (int i = 0; i < m.matrix.length; i++) {
-			for (int j = 0; j < m.matrix[0].length; j++) {
-				System.out.print(m.matrix[i][j]);
-				if (j < m.matrix[0].length - 1)
+		for (int i = 0; i < this.matrix.length; i++) {
+			for (int j = 0; j < this.matrix[0].length; j++) {
+				System.out.print(this.matrix[i][j]);
+				if (j < this.matrix[0].length - 1)
 					System.out.print(" , ");
 			}
 			System.out.println();
@@ -200,14 +305,22 @@ public class Matrix {
 
 	}
 
+	/**
+	 * Show the available position within a Matrix object.
+	 */
+	public void showPositions() {
+		System.out.println("\n");
+		for (int i = 0; i < this.matrix.length; i++) {
+			for (int j = 0; j < this.matrix[0].length; j++) {
+				System.out.print("(" + i + " , " + j + ")");
+				if (j < this.matrix[0].length - 1)
+					System.out.print(" ");
+			}
+			System.out.println("\n");
+		}
+	}
+
 	public static void main(String[] args) {
 		// quick test
-		Integer[][] da = { { 1, 2, 3 }, { 1, 9, 8 }, { 1, 4, 1 }, { 4, 9, 0 } };
-		Matrix ma = new Matrix(da);
-		Matrix.show(ma);
-		ma.replace_rowCol_ofVal(8);
-		System.out.println(ma.equals(new Matrix(da)));
-		swapVal(ma, new NumPair(1, 2), new NumPair(0, 3));
-		show(ma);
 	}
 }
