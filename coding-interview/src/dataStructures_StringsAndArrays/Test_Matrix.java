@@ -46,6 +46,15 @@ class Test_Matrix {
 		} catch (IllegalArgumentException e) {
 			// pass
 		}
+		
+		try {
+			Integer[][] da = { { 1, 2, 3 }, { 1, 9, 8 }, { 1, 4, 1 }, { 4, 9, 0, 1 } };
+			new Matrix(da);
+			fail("failed to throw IAE for a non-uniformly sized double array.");
+		} catch (IllegalArgumentException e) {
+			// pass
+		}
+		
 		Integer[][] da = { { 1, 2, 3 }, { 1, 9, 8 }, { 1, 4, 1 }, { 4, 9, 0 } };
 		Integer[][] exp = { { 1, 2, 8 }, { 8, 8, 8 }, { 1, 4, 8 }, { 4, 9, 8 } };
 		Matrix expected = new Matrix(exp); // expected matrix
@@ -71,7 +80,6 @@ class Test_Matrix {
 				{ 5, 3, 2, 0, 1 } };
 		Matrix ma = new Matrix(da);
 		Matrix ma2 = new Matrix(da2);
-		// show(ma2);
 		ma.showPositions();
 		ma2.showPositions();
 
