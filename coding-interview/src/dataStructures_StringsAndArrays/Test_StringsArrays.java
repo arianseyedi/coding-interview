@@ -1,4 +1,4 @@
-package algorithms_stringsArrays;
+package dataStructures_StringsAndArrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,4 +1,4 @@
-package algorithms_stringsArrays;
+package dataStructures_StringsAndArrays;
 
 import java.util.List;
 
