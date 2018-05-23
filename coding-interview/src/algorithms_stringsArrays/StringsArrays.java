@@ -183,7 +183,8 @@ public class StringsArrays {
 	 * @param m_ix
 	 *            moving index used to iterate the array to search for pair sums.
 	 * @param end_ix
-	 *            end index, to mark the absolute end of the input array that will be inspected.
+	 *            end index, to mark the absolute end of the input array that will
+	 *            be inspected.
 	 * @param pairsLs
 	 *            list of number pairs to be populated.
 	 * @return list of number pairs whose sum is equal to input sum.

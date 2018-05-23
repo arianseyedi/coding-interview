@@ -228,14 +228,14 @@ public class Matrix {
 		if (rows != cols) {
 			throw new IllegalArgumentException("Not a square Matrix! Matrix must be of size N x N");
 		}
-		
+
 		int i, j; // row, col and loop indices
 		Matrix rot = new Matrix(rows, cols);
 		if (rows % 2 != 0) { // odd size. axes are real
 			for (i = 0; i < rows; i++) {
 				for (j = 0; j < cols; j++) {
 					NumPair p = get_90rotatedPos(i, j);
-					rot.set(p, get(i,j));
+					rot.set(p, get(i, j));
 				}
 			}
 			return rot;
@@ -243,7 +243,7 @@ public class Matrix {
 		// matrix is of even size, no real axis
 		for (i = 0; i < rows; i++) {
 			for (j = 0; j < cols; j++) {
-				rot.set(new NumPair(j, rows - i - 1), get(i,j));	
+				rot.set(new NumPair(j, rows - i - 1), get(i, j));
 			}
 		}
 		return rot;

@@ -77,7 +77,7 @@ class Test_Matrix {
 
 		Matrix ma_rot = ma.rotate90_CW().rotate90_CW().rotate90_CW().rotate90_CW();
 		assertEquals(ma, ma_rot); // must be the same as original, rotated 360 degrees
-		
+
 		Matrix ma_rot2 = ma2.rotate90_CW().rotate90_CW().rotate90_CW().rotate90_CW();
 		assertEquals(ma2, ma_rot2); // must be the same as original, rotated 360 degrees
 	}
