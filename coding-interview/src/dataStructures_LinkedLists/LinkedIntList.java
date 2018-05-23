@@ -232,19 +232,19 @@ public class LinkedIntList {
 		if (index < 0 || index > this.size) {
 			throw new IndexOutOfBoundsException("index < 0 or " + "index is larger than the length of list");
 		}
-		Node addNode = new Node(elem, null);
-		if (index == 0) {
+		
+		if (index == 0) { // index is 0, add first
 			this.addFirst(elem);
 			return;
 		}
-		if (index == this.size) {
+		if (index == this.size) { // add to the end
 			this.add(elem);
 			return;
-		} else {
-			Node prevN = this.getNode(index - 1);
-			Node n = prevN.getNext();
-			prevN.setNext(addNode);
-			addNode.setNext(n);
+		} else { // add middle
+			Node prev = this.getNode(index - 1);
+			Node oldNext = prev.getNext();
+			Node newNext = new Node(elem, oldNext);
+			prev.setNext(newNext);
 			this.size++;
 		}
 		return;
@@ -262,18 +262,18 @@ public class LinkedIntList {
 		if (this.isEmpty()) {
 			throw new NoSuchElementException("No Such Element");
 		}
-		int firstElem = this.head.getData();
+		int headElem = this.head.getData();
 		if (this.size == 1) {
 			this.head = null;
 			this.tail = null;
-			this.size--;
-			return firstElem;
 		}
-		Node oldHead = this.head;
-		this.head = this.head.getNext();
-		oldHead.setNext(null);
-		this.size--;
-		return firstElem;
+		else {
+			Node oldHead = this.head;
+			this.head = this.head.getNext();
+			oldHead.setNext(null); // remove the link to be safe
+		}
+		this.size--; // decrement size
+		return headElem;
 
 	}
 
@@ -292,13 +292,13 @@ public class LinkedIntList {
 		if (this.size == 1) {
 			this.head = null;
 			this.tail = null;
-			this.size--;
-			return lastVal;
 		}
-		Node secondLastTail = this.getNode(this.size - 2);
-		secondLastTail.setNext(null);
-		this.tail = secondLastTail;
-		this.size--;
+		else {
+			Node secondLastTail = this.getNode(this.size - 2);
+			secondLastTail.setNext(null);
+			this.tail = secondLastTail;
+		}
+		this.size--; // decrement size
 		return lastVal;
 	}
 
@@ -332,13 +332,12 @@ public class LinkedIntList {
 		if (index == this.size - 1) {
 			return this.removeLast();
 		}
-		Node lastNodeBefore = this.getNode(index - 1);
-		Node nodeToRemove = this.getNode(index);
-		lastNodeBefore.setNext(nodeToRemove.getNext());
-		nodeToRemove.setNext(null);
-		this.size--;
-
-		return nodeToRemove.getData();
+		Node prev = this.getNode(index - 1);
+		Node toRemove = prev.getNext();
+		prev.setNext(toRemove.getNext());
+		toRemove.setNext(null); // remove reference to be safe
+		this.size--; // decrement size
+		return toRemove.getData();
 
 	}
 
