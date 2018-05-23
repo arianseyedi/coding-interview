@@ -3,8 +3,8 @@ package algorithms_stringsArrays;
 import java.util.List;
 
 /**
- * This class creates a pair of Integers. Used as a wrapper to keep two Integers
- * with a certain property ex. co-prime, or sum up to X, etc.
+ * This helper class creates a pair of Integers. Used as a wrapper to keep two
+ * Integers with a certain property ex. co-prime, or sum up to X, etc.
  * 
  * @author Arian Seyedi
  *
@@ -44,6 +44,17 @@ public class NumPair {
 	public Integer getPair2() {
 		Integer copy = this.pair2.intValue();
 		return copy;
+	}
+
+	/**
+	 * Deep copy the input number pair
+	 * 
+	 * @param toCopy
+	 *            number pair to deep copy
+	 * @return deep copy of input number pair
+	 */
+	public static NumPair deepCopy(NumPair toCopy) {
+		return new NumPair(toCopy.getPair1(), toCopy.getPair2());
 	}
 
 	/**
@@ -98,8 +109,11 @@ public class NumPair {
 
 	/**
 	 * Returns true if all the unique number pairs in one list exist in the other.
-	 * @param npLs1 list of unique number pairs.
-	 * @param npLs2 list of unique number pairs.
+	 * 
+	 * @param npLs1
+	 *            list of unique number pairs.
+	 * @param npLs2
+	 *            list of unique number pairs.
 	 * @return True if all the unique number pairs in one list exist in the other.
 	 */
 	public static boolean containsAll(List<NumPair> npLs1, List<NumPair> npLs2) {

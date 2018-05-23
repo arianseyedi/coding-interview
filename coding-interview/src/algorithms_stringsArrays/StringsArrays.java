@@ -7,6 +7,7 @@ import java.util.*;
  * a certain purpose. They may seem a bit random, as they are, but will give
  * insights as to how certain things can be done.
  * 
+ * @see Laakmann McDowell, 2015 Chapter1 for original questions.
  * @author Arian Seyedi
  *
  */
