@@ -1,4 +1,4 @@
-package dataStructures_LinkedLists;
+package dataStructures_LinkedIntLists;
 
 /**
  * Nodes for a linked list of int values. A node stores an int value (called the
