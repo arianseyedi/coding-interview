@@ -1,4 +1,4 @@
-package dataStructures_LinkedLists;
+package dataStructures_LinkedIntLists;
 
 /**
  * Utility methods for Linked List class.
