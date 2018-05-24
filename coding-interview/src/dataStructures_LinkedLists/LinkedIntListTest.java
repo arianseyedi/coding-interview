@@ -559,4 +559,22 @@ public class LinkedIntListTest {
 			checkStructure(exp, t);
 		}
 	}
+
+	/**
+	 * Challenge BCNs, check for errors, check for accuracy.
+	 */
+	@Test
+	public void test19_removeDups() {
+		// equals
+		Integer[][] a = { { 0, 1, 2, 3, 4 }, { 0, 1, 2, 3, 4 }, { 4 }, { 1, 2 }, {} };
+		Integer[][] b = { { 0, 1, 2, 3, 4, 4 }, { 0, 0, 1, 1, 2, 2, 3, 2, 3, 4, 3, 4, 1, 0 }, { 4, 4, 4 }, { 1, 2, 1 },
+				{} };
+		for (int i = 0; i < a.length; i++) {
+			LinkedIntList expected = new LinkedIntList(a[i]);
+			;
+			LinkedIntList actual = new LinkedIntList(b[i]);
+			actual.removeDups();
+			assertEquals(expected, actual);
+		}
+	}
 }
