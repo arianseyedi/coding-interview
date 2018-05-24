@@ -29,6 +29,12 @@ public class LinkedIntList {
 		this.tail = null;
 	}
 
+	public LinkedIntList(Integer[] ls) {
+		for (int i = 0; i < ls.length; i++) {
+			this.add(ls[i]);
+		}
+	}
+
 	/**
 	 * Return a reference to the first node of the list (the head node).
 	 * 
@@ -232,7 +238,7 @@ public class LinkedIntList {
 		if (index < 0 || index > this.size) {
 			throw new IndexOutOfBoundsException("index < 0 or " + "index is larger than the length of list");
 		}
-		
+
 		if (index == 0) { // index is 0, add first
 			this.addFirst(elem);
 			return;
@@ -266,8 +272,7 @@ public class LinkedIntList {
 		if (this.size == 1) {
 			this.head = null;
 			this.tail = null;
-		}
-		else {
+		} else {
 			Node oldHead = this.head;
 			this.head = this.head.getNext();
 			oldHead.setNext(null); // remove the link to be safe
@@ -292,8 +297,7 @@ public class LinkedIntList {
 		if (this.size == 1) {
 			this.head = null;
 			this.tail = null;
-		}
-		else {
+		} else {
 			Node secondLastTail = this.getNode(this.size - 2);
 			secondLastTail.setNext(null);
 			this.tail = secondLastTail;
@@ -376,5 +380,90 @@ public class LinkedIntList {
 		for (int i = 0; i < n; i++) {
 			this.addFirst(this.removeLast());
 		}
+	}
+
+	/**
+	 * A private method to help eliminate the need for multiple traversal of a
+	 * linked list to delete an item. Method receives the previous node and attaches
+	 * it to its next.next (thus escaping the unwanted node). Also as a safety
+	 * precaution, the reference to the next node for the deleted node will be set
+	 * to null before deletion.
+	 * 
+	 * @param previous
+	 *            the node previous to the unwanted node to be deleted.
+	 */
+	private void removeNext(Node previous) {
+		Node toDelete = previous.getNext();
+		if (toDelete == null) {
+			return; // nothing to do
+		}
+		Node toAttach = toDelete.getNext();
+		if (toAttach == null) {
+			this.removeLast(); // to be deleted is the tail.
+			return;
+		}
+		toDelete.setNext(null); // for safety remove reference from to-be deleted node
+		previous.setNext(toAttach); // hop over the unwanted node.
+		size--; // decrement size
+	}
+
+	/**
+	 * Eliminate duplicates stably, the first element will be kept and the upcoming
+	 * repeated elements will be removed.
+	 * 
+	 * <p>
+	 * This question is drawn from the book Cracking the Coding Interview,
+	 * 
+	 * @see Laakmann McDowell, 2015 Chapter2 for original questions.
+	 */
+	public void removeDups() {
+		if (this.size < 2) { // list has no duplicates
+			return;
+		}
+		Integer[] uniqueArr = new Integer[this.size];
+		int i = 1; // array index
+		Node nowAt = this.head;
+		Node next = nowAt.getNext();
+		uniqueArr[0] = this.head.getData(); // first item, definitely unique
+		while (nowAt != null) {
+			if (Utilities.existsInArray(uniqueArr, next.getData())) {
+				removeNext(nowAt); // remove next
+				next = nowAt.getNext(); // get new next
+				if (next == null) // if null, end is reached
+					break;
+			} else { // next item is unique
+				nowAt = nowAt.getNext(); // now at next
+				next = nowAt.getNext(); // get next of above
+				uniqueArr[i++] = nowAt.getData(); // add item to array
+			}
+		}
+	}
+
+	/**
+	 * Return true only if every pair of the same index between the input and the
+	 * linked list object are equal in value.
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj.getClass() != this.getClass()) {
+			return false;
+		}
+		LinkedIntList toCompare = (LinkedIntList) obj; // safe casting
+		if (toCompare.size != this.size) {
+			return false;
+		}
+		Node toCompNode = toCompare.head;
+		Node thisNode = this.head;
+		for (int i = 0; i < this.size; i++) {
+			if (thisNode.getData() != toCompNode.getData())
+				return false;
+			toCompNode = toCompNode.getNext();
+			thisNode = thisNode.getNext();
+		}
+		return true;
+	}
+
+	public static void main(String[] args) {
+		// quick test
 	}
 }

@@ -8,8 +8,8 @@ import java.util.*;
  * insights as to how certain things can be done.
  * 
  * @see Laakmann McDowell, 2015 Chapter1 for original questions.
- * @author Arian Seyedi
- *
+ * @author Arian Seyedi TODO add p tags to doc TODO move utility methods to
+ *         another class
  */
 public class StringsArrays {
 	static int count = 0; // for debugging
