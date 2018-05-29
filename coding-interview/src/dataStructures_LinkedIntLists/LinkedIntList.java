@@ -408,8 +408,8 @@ public class LinkedIntList {
 	}
 
 	/**
-	 * Eliminate duplicates stably, the first element will be kept and the upcoming
-	 * repeated elements will be removed.
+	 * Eliminate duplicates stably using a buffer, the first element will be kept
+	 * and the upcoming repeated elements will be removed.
 	 * 
 	 * <p>
 	 * This question is drawn from the book Cracking the Coding Interview,
