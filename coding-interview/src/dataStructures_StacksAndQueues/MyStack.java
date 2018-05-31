@@ -9,7 +9,7 @@ import java.util.Stack;
  * other stack as a temporary one.
  * 
  * @author Arian Seyedi
- *
+ * @see Laakmann McDowell, G. (2015) Chapter 3 Excercise 5
  */
 public class MyStack<E extends Comparable<E>> extends Stack<E> {
 

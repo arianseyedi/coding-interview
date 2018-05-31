@@ -8,6 +8,8 @@ import java.util.*;
  * stacks.
  * 
  * @author Arian Seyedi
+ * @see Laakmann McDowell, G. (2015) Chapter 3 Excercise 1 (although this is
+ *      slightly more advanced)
  */
 public class ExtremaStack<E extends Comparable<E>> extends Stack<E> {
 
