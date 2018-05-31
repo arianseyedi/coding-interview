@@ -46,7 +46,7 @@ class Test_Matrix {
 		} catch (IllegalArgumentException e) {
 			// pass
 		}
-		
+
 		try {
 			Integer[][] da = { { 1, 2, 3 }, { 1, 9, 8 }, { 1, 4, 1 }, { 4, 9, 0, 1 } };
 			new Matrix(da);
@@ -54,7 +54,7 @@ class Test_Matrix {
 		} catch (IllegalArgumentException e) {
 			// pass
 		}
-		
+
 		Integer[][] da = { { 1, 2, 3 }, { 1, 9, 8 }, { 1, 4, 1 }, { 4, 9, 0 } };
 		Integer[][] exp = { { 1, 2, 8 }, { 8, 8, 8 }, { 1, 4, 8 }, { 4, 9, 8 } };
 		Matrix expected = new Matrix(exp); // expected matrix
