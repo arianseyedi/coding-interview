@@ -25,7 +25,7 @@
          - **StringsArrays.java**  
                *allMutations(String)*: all mutations of the letters in an input string  
                *couldBeAPalindrome(String)*: whether a series of characters in a string could form a Palindrome  
-               *inCommon(Integer[], Integer[])*: A number of elements in common between two input arrays  
+               *inCommon(Integer[], Integer[])*: The number of elements in common between two input arrays in O(n log n) 
                *isUnique(String, boolean)*: true if no two characters within a string are the same  
                *pairsSum(Integer[], Integer)*: pairs of numbers within an array whose sum is equal to a certain given amount  
                *replaceSpaceWith(String, String)*: URLify a string by replacing all spaces with a given set of characters (e.g. %20)
