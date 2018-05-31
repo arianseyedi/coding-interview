@@ -12,7 +12,7 @@
          - **ExtremaStack.java**:  
             a stack that keeps track of both minimum and maximum values on a stack, returns them in O(1)   
          - **MyQueue.java**:  
-            implementation of a stack using a queue  
+            implementation of a queue using two stack
          - **MyStack.java**:  
             *sort()*: sort method for a stack using only one other stack as a temporary one
       
