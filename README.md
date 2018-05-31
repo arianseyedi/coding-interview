@@ -9,7 +9,7 @@
       
       * **dataStructures_StacksAndQueues**:  
          - **ExtremaStack.java**:  
-            a stack that keeps track of both minimum and maximum values on a stack   
+            a stack that keeps track of both minimum and maximum values on a stack, returns them in O(1)   
          - **MyQueue.java**:  
             implementation of a stack using a queue  
          - **MyStack.java**:  
