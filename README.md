@@ -6,7 +6,8 @@
    1. **Data Structures**:  
    
       * **dataStructures_LinkedIntLists**:  
-         Description: A linked int list implementation and most commonly used methods such as get, remove(first, last, any), toString, shift left/right and remove duplicate. 
+         Description: A linked int list implementation and most commonly used methods such as get, remove(first, last, any), toString, shift left/right and remove duplicate.  
+         - *removeDups()*: remove duplicates in a linked list only in O(n) runtime.  
       
       * **dataStructures_StacksAndQueues**:  
          - **ExtremaStack.java**:  
