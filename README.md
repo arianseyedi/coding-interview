@@ -1,8 +1,9 @@
 # The Coding-Interview
-  This repository is dedicated to efficient implimentation of interesting algorithms, much like the ones asked in phone/in person interviews. </br> Most questions are drawn from Laakmann McDowell, 2015. Implementations are all mine along with the test cases for each main class. I do not use the solutions but if I do, I would mention that in the documentation of that method/class. Here I am not trying to duplicate other people's work for mine, nor am I copying something without wanting to mention where from. I simply love coding, and this is my way of practicing and also building a portfolio. You can leave your comments/suggestions for me, it will be greatly appreciated.
+  This repository is dedicated to efficient implimentation of interesting algorithms, much like the ones asked in phone/in person interviews. </br> The motivation of this project follows directly from Laakmann McDowell, 2015 book "Cracking the Coding Interview". This book is beyond awesome, and I love doing its exercises. Implementations are all mine along with the test cases for each main class.  
+  I do not use the solutions but if I do, I would mention that in the documentation of that method/class. Here I am not trying to duplicate other people's work for mine, nor am I copying something without wanting to mention where from. I simply love coding, and this is my way of practicing and also building a portfolio. You can leave your comments/suggestions for me, it will be greatly appreciated.
 ### In this Java project you will see the following packages (*JUnit test cases exist but not mentioned here*):
 
-   1. **Algorithms**
+   1. **Data Structures**:  
    
       * **dataStructures_LinkedIntLists**:  
          Description: A linked int list implementation and most commonly used methods such as get, remove(first, last, any), toString, shift left/right and remove duplicate. 
@@ -29,7 +30,7 @@
                *replaceSpaceWith(String, String)*: URLify a string by replacing all spaces with a given set of characters (e.g. %20)
                *stringCompressor(String)*: return string containing each letter followed by its number of repitition  
       
-   2. **Data Structures**:  
+   2. **Concepts And Algorithms**:  
       //TODO
    3. **Knowledge**:  
       //TODO
