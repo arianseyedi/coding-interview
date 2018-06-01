@@ -13,9 +13,17 @@
          - **ExtremaStack.java**:  
             a stack that keeps track of both minimum and maximum values on a stack, returns them in O(1)   
          - **MyQueue.java**:  
-            implementation of a queue using two stack
-         - **MyStack.java**:  
-            *sort()*: sort method for a stack using only one other stack as a temporary one
+            implementation of a queue using two stack  
+         - **MyStack.java**:   
+            *sort()*: sort method for a stack using only one other stack as a temporary one  
+         - **PlateStack.java**:   
+            *peek()*: return top element on PlateStack without chaning stack state.  
+            *peek(Integer)*: return top element of an inner stack within the PlateStack  
+            *pop()*: pop top element from the PlateStack  
+            *pop(Integer)*: pop top element from an inner stack within the PlateStack  
+            *push(E)*: push an element onto the most recent stack within the PlateStack  
+            *push(E, Integer)*: push an element onto an inner stack within the PlateStack (if stack full, old element will be put on the most recent stack).  
+            *stockSize()*: number of stacks that the PlateStack conisits of.  
       
       * **dataStructures_StringsAndArrays**:  
          - **Matrix.java**  
