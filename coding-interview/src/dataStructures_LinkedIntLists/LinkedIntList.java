@@ -3,7 +3,8 @@ package dataStructures_LinkedIntLists;
 import java.util.NoSuchElementException;
 
 /**
- * This is a lab work from my Advance OOP course EECS2030 taught by Professor
+ * A part of this is reused from a lab work from my Advance OOP course EECS2030
+ * taught by Professor
  * <a href="http://eecs.lassonde.yorku.ca/faculty/matthew-kyan/"> Mathew Kyan
  * </a> All main methods have been implemented by me, @author Arian Seyedi. I
  * have also made small changes to the code to make it more efficient, secure,

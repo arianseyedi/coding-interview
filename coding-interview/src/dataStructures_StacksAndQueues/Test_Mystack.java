@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 
 class Test_Mystack {
 
-	MyStack<Integer> actual;
-	MyStack<Integer> expected;
+	SortableStack<Integer> actual;
+	SortableStack<Integer> expected;
 
 	/**
 	 * Test instantiation Test sort method for a stack for robustness.
@@ -18,8 +18,8 @@ class Test_Mystack {
 		try {
 			Integer[] intArr = { 1, 9, 12, 2, 99, -12, 4 };
 			Integer[] intArr_exp = { 99, 12, 4, 2, 1, -12 };
-			actual = new MyStack<Integer>(Arrays.asList(intArr));
-			expected = new MyStack<Integer>(Arrays.asList(intArr_exp));
+			actual = new SortableStack<Integer>(Arrays.asList(intArr));
+			expected = new SortableStack<Integer>(Arrays.asList(intArr_exp));
 			actual.sort();
 			assertEquals(expected, actual);
 		} catch (Exception e) {
@@ -28,8 +28,8 @@ class Test_Mystack {
 
 		try {
 			Integer[] intArr = {};
-			actual = new MyStack<Integer>(Arrays.asList(intArr));
-			expected = new MyStack<Integer>(); // instantiates an empty stack
+			actual = new SortableStack<Integer>(Arrays.asList(intArr));
+			expected = new SortableStack<Integer>(); // instantiates an empty stack
 			actual.sort();
 			assertEquals(expected, actual);
 		} catch (Exception e) {
@@ -39,8 +39,8 @@ class Test_Mystack {
 		try {
 			Integer[] intArr = { 1, 1, 2 };
 			Integer[] intArr_exp = { 2, 1, 1 };
-			actual = new MyStack<Integer>(Arrays.asList(intArr));
-			expected = new MyStack<Integer>(Arrays.asList(intArr_exp));
+			actual = new SortableStack<Integer>(Arrays.asList(intArr));
+			expected = new SortableStack<Integer>(Arrays.asList(intArr_exp));
 			actual.sort();
 			assertEquals(expected, actual);
 		} catch (Exception e) {

@@ -165,13 +165,13 @@ class Test_StringsArrays {
 	 */
 	@Test
 	public void test_isUnique() {
-		assertTrue(StringsArrays.isUnique("Arian Seyd", false)); // exp true
-		assertTrue(!StringsArrays.isUnique("Arian Seyd", true)); // exp fale
-		assertTrue(StringsArrays.isUnique("", false)); // exp true
-		assertTrue(StringsArrays.isUnique(" ", true)); // exp true
-		assertTrue(!StringsArrays.isUnique("/'124*&$*7", false)); // exp false
-		assertTrue(!StringsArrays.isUnique("/'124*&$*7", true)); // exp false
-		assertTrue(StringsArrays.isUnique("/'124*&$7", true)); // exp true
+		assertTrue(StringsArrays.isUnique("Arian Seyd", false)); // exp_ls true
+		assertTrue(!StringsArrays.isUnique("Arian Seyd", true)); // exp_ls fale
+		assertTrue(StringsArrays.isUnique("", false)); // exp_ls true
+		assertTrue(StringsArrays.isUnique(" ", true)); // exp_ls true
+		assertTrue(!StringsArrays.isUnique("/'124*&$*7", false)); // exp_ls false
+		assertTrue(!StringsArrays.isUnique("/'124*&$*7", true)); // exp_ls false
+		assertTrue(StringsArrays.isUnique("/'124*&$7", true)); // exp_ls true
 	}
 
 	/**
@@ -181,13 +181,13 @@ class Test_StringsArrays {
 	 */
 	@Test
 	public void test_palindrome() {
-		assertTrue(StringsArrays.couldBeAPalindrome("A man, a plan, a canal, Panama!")); // exp true
-		assertTrue(StringsArrays.couldBeAPalindrome("Was it a car or a cat I saw?")); // exp true No 'x' in Nixon
-		assertTrue(StringsArrays.couldBeAPalindrome("No 'x' in Nixon")); // exp true
-		assertTrue(StringsArrays.couldBeAPalindrome("No 'xY' in Nixon")); // exp true
-		assertTrue(!StringsArrays.couldBeAPalindrome("No 'Y' in Nixon")); // exp false
-		assertTrue(!StringsArrays.couldBeAPalindrome("")); // exp true
-		assertTrue(!StringsArrays.couldBeAPalindrome("APANAMA")); // exp true
+		assertTrue(StringsArrays.couldBeAPalindrome("A man, a plan, a canal, Panama!")); // exp_ls true
+		assertTrue(StringsArrays.couldBeAPalindrome("Was it a car or a cat I saw?")); // exp_ls true No 'x' in Nixon
+		assertTrue(StringsArrays.couldBeAPalindrome("No 'x' in Nixon")); // exp_ls true
+		assertTrue(StringsArrays.couldBeAPalindrome("No 'xY' in Nixon")); // exp_ls true
+		assertTrue(!StringsArrays.couldBeAPalindrome("No 'Y' in Nixon")); // exp_ls false
+		assertTrue(!StringsArrays.couldBeAPalindrome("")); // exp_ls true
+		assertTrue(!StringsArrays.couldBeAPalindrome("APANAMA")); // exp_ls true
 
 	}
 }
