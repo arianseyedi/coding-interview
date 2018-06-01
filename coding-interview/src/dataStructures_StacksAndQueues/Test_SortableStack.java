@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
-class Test_Mystack {
+class Test_SortableStack {
 
 	SortableStack<Integer> actual;
 	SortableStack<Integer> expected;
