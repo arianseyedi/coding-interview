@@ -23,7 +23,7 @@ public class ExtremaStack<E extends Comparable<E>> extends Stack<E> {
 	/**
 	 * Instantiate an Extrema Stack with an already existing list.
 	 * 
-	 * @param ls
+	 * @param exp_ls
 	 *            list to be added to the Extrema Stack upon instantiation.
 	 */
 	public ExtremaStack(List<E> ls) {

@@ -50,11 +50,11 @@ public class LinkedIntListTest {
 
 	/**
 	 * Checks that the structure of the linked list got matches the structure of the
-	 * list exp. Checks that the linked list has the correct size, head node, and
+	 * list exp_ls. Checks that the linked list has the correct size, head node, and
 	 * tail node, and that the elements in the linked list equal the elements the
 	 * expected list.
 	 * 
-	 * @param exp
+	 * @param exp_ls
 	 *            the expected list
 	 * @param got
 	 *            the list to check

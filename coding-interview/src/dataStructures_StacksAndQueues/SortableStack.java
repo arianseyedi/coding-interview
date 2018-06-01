@@ -11,7 +11,7 @@ import java.util.Stack;
  * @author Arian Seyedi
  *
  */
-public class MyStack<E extends Comparable<E>> extends Stack<E> {
+public class SortableStack<E extends Comparable<E>> extends Stack<E> {
 
 	/**
 	 * 
@@ -22,7 +22,7 @@ public class MyStack<E extends Comparable<E>> extends Stack<E> {
 	/**
 	 * Constructor, initialize a stack and a queue.
 	 */
-	public MyStack() {
+	public SortableStack() {
 		s = new Stack<>();
 	}
 
@@ -30,10 +30,10 @@ public class MyStack<E extends Comparable<E>> extends Stack<E> {
 	 * Instantiate an MyStack object with an already existing list. Easier for
 	 * testing.
 	 * 
-	 * @param ls
+	 * @param exp_ls
 	 *            list to be added to MyStack upon instantiation.
 	 */
-	public MyStack(List<E> ls) {
+	public SortableStack(List<E> ls) {
 		s = new Stack<>();
 		Iterator<E> it = ls.iterator();
 		while (it.hasNext()) {
@@ -69,11 +69,11 @@ public class MyStack<E extends Comparable<E>> extends Stack<E> {
 		}
 	}
 
-	/**
+	/*
 	 * push element onto the stack
 	 * 
-	 * @param element
-	 *            element to add onto the stack
+	 * @param element element to add onto the stack
+	 * 
 	 * @return element just added to the stack.
 	 */
 	@Override
@@ -81,7 +81,7 @@ public class MyStack<E extends Comparable<E>> extends Stack<E> {
 		return s.push(element);
 	}
 
-	/**
+	/*
 	 * pop element onto the stack
 	 * 
 	 * @return element just popped from the stack.
@@ -91,7 +91,7 @@ public class MyStack<E extends Comparable<E>> extends Stack<E> {
 		return s.pop();
 	}
 
-	/**
+	/*
 	 * represent main stack where the left-most item is at the top and the
 	 * right-most item is at the bottom of the stack
 	 */
