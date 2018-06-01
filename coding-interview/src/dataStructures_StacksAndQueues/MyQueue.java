@@ -35,7 +35,7 @@ import java.util.Stack;
  * </table>
  * 
  * @author Arian Seyedi
- *
+ * @see Laakmann McDowell, G. (2015) Chapter 3 Excercise 4.
  */
 public class MyQueue<E extends Comparable<E>> {
 
