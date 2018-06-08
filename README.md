@@ -38,7 +38,8 @@
                *pairsSum(Integer[], Integer)*: pairs of numbers within an array whose sum is equal to a certain given amount  
                *replaceSpaceWith(String, String)*: URLify a string by replacing all spaces with a given set of characters (e.g. %20)
                *stringCompressor(String)*: return string containing each letter followed by its number of repitition  
-      
+       * **dataStructures_Graph_DFS**:  
+          - This particular data structure is found [here](https://github.com/arianseyedi/JavaProjects/tree/master/Graphs "Graphs").    More information will be found under the given link.
    2. **Concepts And Algorithms**:  
       //TODO
    3. **Knowledge**:  
